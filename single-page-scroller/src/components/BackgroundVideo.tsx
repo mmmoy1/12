@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 export default function BackgroundVideo() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
-  const [src, setSrc] = useState<string>('/background.mp4')
+  const [src, setSrc] = useState<string>('/background-video.mp4.mov')
 
   useEffect(() => {
     let isMounted = true
@@ -15,7 +15,8 @@ export default function BackgroundVideo() {
         // ignore
       }
     }
-    // Try custom filename first; fallback remains background.mp4
+    // Priority order: Firebase file -> custom GitHub file -> default background
+    prefer('/background-video.mp4.mov')
     prefer('/Create_a_subtle_202509101123.mp4')
     return () => {
       isMounted = false
