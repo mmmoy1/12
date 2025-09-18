@@ -68,6 +68,13 @@ class Player:
     romance_partner: Optional[str] = None
     story_flags: Dict[str, bool] = None
     plot_twists_discovered: List[str] = None
+    cybernetics: List[str] = None
+    gang_territory: List[str] = None
+    time_of_day: str = "day"
+    day_count: int = 1
+    hacking_skill: int = 0
+    gambling_skill: int = 0
+    racing_skill: int = 0
 
 @dataclass
 class Enemy:
@@ -147,9 +154,9 @@ class CyberpunkAdventure:
             "neon_streets": Location(
                 "Neon Streets",
                 "The bustling streets of Neo-Tokyo, filled with holographic advertisements and cyberpunk atmosphere. The air shimmers with neon reflections.",
-                {"north": "corporate_tower", "south": "underground_club", "east": "tech_market", "west": "abandoned_warehouse", "northeast": "memory_lane"},
+                {"north": "corporate_tower", "south": "underground_club", "east": "tech_market", "west": "abandoned_warehouse", "northeast": "memory_lane", "southeast": "red_light_district", "northwest": "industrial_zone"},
                 [self.items["energy_drink"], self.items["plasma_pistol"]],
-                ["street_vendor", "cyberpunk"],
+                ["street_vendor", "cyberpunk", "street_performer"],
                 [self.enemies["cyber_thug"]]
             ),
             "corporate_tower": Location(
@@ -255,6 +262,255 @@ class CyberpunkAdventure:
                 [self.items["data_chip"]],
                 ["corporate_mole"],
                 [self.enemies["corporate_guard"]]
+            ),
+            # NEW MASSIVE LOCATIONS
+            "red_light_district": Location(
+                "Red Light District",
+                "A neon-soaked area filled with bars, clubs, and entertainment venues. The air is thick with music and the smell of alcohol.",
+                {"northwest": "neon_streets", "east": "casino_royale", "south": "underground_arena"},
+                [self.items["energy_drink"]],
+                ["bar_tender", "dancer", "gambler"],
+                [self.enemies["cyber_thug"]]
+            ),
+            "industrial_zone": Location(
+                "Industrial Zone",
+                "A massive area filled with factories, warehouses, and industrial complexes. The air is thick with smoke and the sound of machinery.",
+                {"southeast": "neon_streets", "north": "power_plant", "east": "docks"},
+                [self.items["health_pack"]],
+                ["factory_worker", "union_leader"],
+                [self.enemies["cyber_thug"], self.enemies["corporate_guard"]]
+            ),
+            "casino_royale": Location(
+                "Casino Royale",
+                "A luxurious casino filled with holographic games and high-stakes gambling. The air is thick with excitement and money.",
+                {"west": "red_light_district", "up": "vip_lounge"},
+                [self.items["corporate_id"]],
+                ["casino_manager", "high_roller", "dealer"],
+                []
+            ),
+            "underground_arena": Location(
+                "Underground Arena",
+                "A hidden fighting arena where cybernetic gladiators battle for entertainment. The air is thick with sweat and blood.",
+                {"north": "red_light_district", "down": "death_match"},
+                [self.items["neural_implant"]],
+                ["arena_owner", "fighter", "bookie"],
+                [self.enemies["cyber_psycho"]]
+            ),
+            "power_plant": Location(
+                "Power Plant",
+                "A massive facility that powers the entire city. The air hums with electricity and the sound of generators.",
+                {"south": "industrial_zone", "up": "control_room"},
+                [self.items["emp_grenade"]],
+                ["engineer", "security_chief"],
+                [self.enemies["security_drone"], self.enemies["corporate_guard"]]
+            ),
+            "docks": Location(
+                "The Docks",
+                "A massive port area where ships arrive and depart. The air is thick with salt and the sound of waves.",
+                {"west": "industrial_zone", "east": "offshore_platform"},
+                [self.items["hacker_tool"]],
+                ["dock_worker", "smuggler", "customs_agent"],
+                [self.enemies["cyber_thug"]]
+            ),
+            "vip_lounge": Location(
+                "VIP Lounge",
+                "An exclusive area for the city's elite. The air is thick with expensive perfume and the sound of quiet conversation.",
+                {"down": "casino_royale"},
+                [self.items["corporate_secrets"]],
+                ["corporate_elite", "politician", "celebrité"],
+                []
+            ),
+            "death_match": Location(
+                "Death Match Arena",
+                "The most dangerous fighting arena in the city. Only the strongest survive here.",
+                {"up": "underground_arena"},
+                [self.items["cyber_sword"]],
+                ["arena_champion", "blood_dealer"],
+                [self.enemies["cyber_psycho"], self.enemies["ai_construct"]]
+            ),
+            "control_room": Location(
+                "Control Room",
+                "The nerve center of the power plant. This is where the city's power is controlled.",
+                {"down": "power_plant"},
+                [self.items["data_chip"]],
+                ["chief_engineer"],
+                [self.enemies["security_drone"]]
+            ),
+            "offshore_platform": Location(
+                "Offshore Platform",
+                "A massive platform in the ocean where illegal activities take place. The air is thick with salt and danger.",
+                {"west": "docks", "down": "underwater_base"},
+                [self.items["ai_core"]],
+                ["platform_owner", "smuggler_king"],
+                [self.enemies["corporate_guard"], self.enemies["cyber_assassin"]]
+            ),
+            "underwater_base": Location(
+                "Underwater Base",
+                "A hidden base beneath the ocean. This is where the most secret operations are conducted.",
+                {"up": "offshore_platform"},
+                [self.items["corporate_secrets"]],
+                ["base_commander", "deep_sea_diver"],
+                [self.enemies["ai_construct"], self.enemies["data_ghost"]]
+            ),
+            "gang_territory": Location(
+                "Gang Territory",
+                "A dangerous area controlled by street gangs. The air is thick with tension and the sound of gunfire.",
+                {"north": "neon_streets", "east": "gang_warehouse"},
+                [self.items["plasma_pistol"]],
+                ["gang_leader", "street_soldier"],
+                [self.enemies["cyber_thug"], self.enemies["cyber_psycho"]]
+            ),
+            "gang_warehouse": Location(
+                "Gang Warehouse",
+                "A massive warehouse used by gangs for illegal activities. The air is thick with dust and danger.",
+                {"west": "gang_territory", "up": "gang_hideout"},
+                [self.items["neural_armor"]],
+                ["warehouse_boss", "gang_member"],
+                [self.enemies["cyber_thug"]]
+            ),
+            "gang_hideout": Location(
+                "Gang Hideout",
+                "A secret hideout where gangs plan their operations. The air is thick with smoke and conspiracy.",
+                {"down": "gang_warehouse"},
+                [self.items["resistance_manifesto"]],
+                ["gang_leader", "street_wise"],
+                []
+            ),
+            "cybernetics_clinic": Location(
+                "Cybernetics Clinic",
+                "A medical facility specializing in cybernetic enhancements. The air is thick with antiseptic and the sound of machinery.",
+                {"north": "tech_market", "east": "research_lab"},
+                [self.items["neural_implant"]],
+                ["cybernetics_doctor", "augmentation_specialist"],
+                []
+            ),
+            "research_lab": Location(
+                "Research Lab",
+                "A cutting-edge laboratory where new technologies are developed. The air is thick with ozone and the sound of experiments.",
+                {"west": "cybernetics_clinic", "down": "experiment_chamber"},
+                [self.items["quantum_processor"]],
+                ["research_scientist", "lab_technician"],
+                [self.enemies["data_ghost"]]
+            ),
+            "experiment_chamber": Location(
+                "Experiment Chamber",
+                "A hidden chamber where dangerous experiments are conducted. The air is thick with electricity and the sound of screams.",
+                {"up": "research_lab"},
+                [self.items["ai_core"]],
+                ["mad_scientist", "test_subject"],
+                [self.enemies["ai_construct"], self.enemies["cyber_psycho"]]
+            ),
+            "data_center": Location(
+                "Data Center",
+                "A massive facility filled with servers and data storage. The air is thick with the sound of cooling fans.",
+                {"south": "corporate_tower", "east": "ai_core_room"},
+                [self.items["data_chip"]],
+                ["data_analyst", "system_admin"],
+                [self.enemies["security_drone"], self.enemies["data_ghost"]]
+            ),
+            "ai_core_room": Location(
+                "AI Core Room",
+                "The heart of the city's AI systems. This is where the most advanced artificial intelligence resides.",
+                {"west": "data_center"},
+                [self.items["ai_core"]],
+                ["ai_specialist", "quantum_engineer"],
+                [self.enemies["ai_guardian"]]
+            ),
+            "underground_city": Location(
+                "Underground City",
+                "A hidden city beneath Neo-Tokyo where outcasts and rebels live. The air is thick with the sound of generators.",
+                {"up": "underground_club", "north": "rebel_hq"},
+                [self.items["resistance_badge"]],
+                ["underground_mayor", "rebel_leader"],
+                []
+            ),
+            "rebel_hq": Location(
+                "Rebel Headquarters",
+                "The command center of the resistance movement. The air is thick with the sound of planning and plotting.",
+                {"south": "underground_city", "east": "war_room"},
+                [self.items["resistance_manifesto"]],
+                ["resistance_commander", "intelligence_officer"],
+                []
+            ),
+            "war_room": Location(
+                "War Room",
+                "A strategic planning room where the resistance plans their operations. The air is thick with the sound of strategy.",
+                {"west": "rebel_hq"},
+                [self.items["corporate_secrets"]],
+                ["tactical_advisor", "war_planner"],
+                []
+            ),
+            "cyber_cafe": Location(
+                "Cyber Cafe",
+                "A futuristic cafe where hackers and netrunners gather. The air is thick with the sound of keyboards and the smell of coffee.",
+                {"north": "tech_market", "east": "hacker_den"},
+                [self.items["neural_link"]],
+                ["cafe_owner", "netrunner", "code_hacker"],
+                []
+            ),
+            "hacker_den": Location(
+                "Hacker Den",
+                "A secret hideout where the city's best hackers gather. The air is thick with the sound of typing and the glow of screens.",
+                {"west": "cyber_cafe", "down": "deep_net"},
+                [self.items["hacker_tool"]],
+                ["master_hacker", "code_warrior"],
+                [self.enemies["data_ghost"]]
+            ),
+            "deep_net": Location(
+                "Deep Net",
+                "A virtual reality space where hackers can access the deepest parts of the network. The air is thick with digital energy.",
+                {"up": "hacker_den"},
+                [self.items["quantum_processor"]],
+                ["net_ghost", "digital_entity"],
+                [self.enemies["data_ghost"], self.enemies["ai_construct"]]
+            ),
+            "night_market": Location(
+                "Night Market",
+                "A bustling market that only opens at night. The air is thick with the smell of street food and the sound of haggling.",
+                {"south": "tech_market", "east": "black_market"},
+                [self.items["energy_drink"]],
+                ["night_vendor", "street_cook", "market_trader"],
+                [self.enemies["cyber_thug"]]
+            ),
+            "rooftop_garden": Location(
+                "Rooftop Garden",
+                "A beautiful garden on the roof of a building. The air is thick with the smell of flowers and the sound of wind.",
+                {"down": "neon_streets", "east": "sky_bridge"},
+                [self.items["family_heirloom"]],
+                ["garden_keeper", "rooftop_dweller"],
+                []
+            ),
+            "sky_bridge": Location(
+                "Sky Bridge",
+                "A bridge connecting two skyscrapers high above the city. The air is thick with wind and the sound of traffic below.",
+                {"west": "rooftop_garden", "east": "corporate_tower"},
+                [self.items["stealth_suit"]],
+                ["bridge_guard", "sky_walker"],
+                [self.enemies["security_drone"]]
+            ),
+            "abandoned_subway": Location(
+                "Abandoned Subway",
+                "An old subway system that's been abandoned. The air is thick with dust and the sound of dripping water.",
+                {"north": "underground_tunnels", "south": "subway_station"},
+                [self.items["health_pack"]],
+                ["subway_dweller", "tunnel_rat"],
+                [self.enemies["cyber_thug"]]
+            ),
+            "subway_station": Location(
+                "Subway Station",
+                "An old subway station that's been converted into a hideout. The air is thick with the sound of trains and the smell of oil.",
+                {"north": "abandoned_subway", "east": "train_yard"},
+                [self.items["hacker_tool"]],
+                ["station_master", "train_conductor"],
+                [self.enemies["cyber_thug"]]
+            ),
+            "train_yard": Location(
+                "Train Yard",
+                "A massive yard where trains are stored and maintained. The air is thick with the sound of machinery and the smell of metal.",
+                {"west": "subway_station", "north": "industrial_zone"},
+                [self.items["neural_armor"]],
+                ["yard_foreman", "train_engineer"],
+                [self.enemies["corporate_guard"]]
             )
         }
         
@@ -353,6 +609,487 @@ class CyberpunkAdventure:
                 "backstory": "Legendary hacker from the old days who knows the true history of the corporate takeover",
                 "faction": "resistance",
                 "quest": "Learn the truth about how the corporations came to power"
+            },
+            # NEW MASSIVE NPCs
+            "street_performer": {
+                "name": "Zara 'Neon' Vega",
+                "dialogue": "Welcome to the streets, choom! I'm Zara, and I've been performing here for years. The neon lights are my stage!",
+                "backstory": "Former corporate entertainer who was fired for speaking out against the system",
+                "faction": "neutral",
+                "romance_available": True,
+                "quest": "Help me expose the truth about corporate entertainment"
+            },
+            "bar_tender": {
+                "name": "Marcus 'Brew' Thompson",
+                "dialogue": "What'll it be, choom? I've got the best drinks in the district, and I've heard all the stories.",
+                "backstory": "Former corporate executive who quit to open a bar in the red light district",
+                "faction": "neutral",
+                "quest": "Help me get revenge on my former corporate bosses"
+            },
+            "dancer": {
+                "name": "Luna 'Siren' Rodriguez",
+                "dialogue": "The music calls to me, and I dance to forget the pain of this world. But sometimes I remember...",
+                "backstory": "Former resistance fighter who lost her memory in a corporate experiment",
+                "faction": "resistance",
+                "romance_available": True,
+                "quest": "Help me recover my lost memories"
+            },
+            "gambler": {
+                "name": "Rico 'Lucky' Martinez",
+                "dialogue": "I've been gambling for years, and I've learned that the house always wins... unless you know how to cheat.",
+                "backstory": "Former corporate accountant who embezzled money and now lives in hiding",
+                "faction": "neutral",
+                "quest": "Help me get my family back from the corporations"
+            },
+            "casino_manager": {
+                "name": "Victoria 'Vegas' Chen",
+                "dialogue": "Welcome to my casino, runner. I've built this place from nothing, and I'll be damned if I let anyone take it from me.",
+                "backstory": "Former corporate lawyer who used her knowledge to build an illegal casino empire",
+                "faction": "neutral",
+                "quest": "Help me protect my casino from corporate takeover"
+            },
+            "high_roller": {
+                "name": "Alexander 'Ace' Blackwood",
+                "dialogue": "Money is just a tool, choom. The real power is in knowing how to use it. And I know how to use it very well.",
+                "backstory": "Former corporate CEO who was ousted in a boardroom coup",
+                "faction": "corporate",
+                "quest": "Help me regain control of my former company"
+            },
+            "dealer": {
+                "name": "Sofia 'Cards' Petrov",
+                "dialogue": "I deal the cards, but I don't control the game. That's up to the players... and the house.",
+                "backstory": "Former corporate statistician who now uses her skills to run casino games",
+                "faction": "neutral",
+                "quest": "Help me expose the rigged games in other casinos"
+            },
+            "arena_owner": {
+                "name": "Darius 'Blood' Johnson",
+                "dialogue": "Welcome to my arena, runner. Here, only the strongest survive. Are you strong enough?",
+                "backstory": "Former corporate security chief who now runs illegal fighting arenas",
+                "faction": "neutral",
+                "quest": "Help me take down the corporate fighting rings"
+            },
+            "fighter": {
+                "name": "Kai 'Steel' Nakamura",
+                "dialogue": "I fight not for glory, but for survival. In this world, you either fight or you die.",
+                "backstory": "Former corporate test subject who escaped and now fights for freedom",
+                "faction": "resistance",
+                "romance_available": True,
+                "quest": "Help me free other test subjects from corporate labs"
+            },
+            "bookie": {
+                "name": "Felix 'Numbers' O'Connor",
+                "dialogue": "I know the odds better than anyone, and I can tell you this: the house always wins... unless you know the right people.",
+                "backstory": "Former corporate data analyst who now runs illegal betting operations",
+                "faction": "neutral",
+                "quest": "Help me expose the corporate betting scandals"
+            },
+            "factory_worker": {
+                "name": "Maria 'Gears' Santos",
+                "dialogue": "I've been working in these factories for 20 years, and I've seen the corporations destroy everything I love.",
+                "backstory": "Former union leader who was forced to work in corporate factories",
+                "faction": "resistance",
+                "quest": "Help me organize a workers' revolution"
+            },
+            "union_leader": {
+                "name": "Carlos 'Union' Rodriguez",
+                "dialogue": "The workers are the backbone of this city, and we won't be silenced anymore. It's time to fight back!",
+                "backstory": "Former corporate manager who turned against the system and now leads the workers",
+                "faction": "resistance",
+                "quest": "Help me plan a massive workers' strike"
+            },
+            "engineer": {
+                "name": "Dr. Sarah 'Power' Kim",
+                "dialogue": "I keep the city running, but I've seen what the corporations are really doing with all this power. It's not right.",
+                "backstory": "Former corporate engineer who discovered the true purpose of the power plant",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate power grid"
+            },
+            "security_chief": {
+                "name": "James 'Iron' Wilson",
+                "dialogue": "I'm here to protect the power plant, but I've seen things that make me question who I'm really protecting.",
+                "backstory": "Former corporate security chief who is having second thoughts about his job",
+                "faction": "corporate",
+                "quest": "Help me decide whether to stay loyal or defect"
+            },
+            "dock_worker": {
+                "name": "Roberto 'Docks' Martinez",
+                "dialogue": "I've seen what comes through these docks, and it's not just cargo. The corporations are smuggling something dangerous.",
+                "backstory": "Former corporate dock worker who discovered illegal smuggling operations",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate smuggling ring"
+            },
+            "smuggler": {
+                "name": "Isabella 'Shadow' Chen",
+                "dialogue": "I move things that others can't, but I've seen what the corporations are really shipping. It's not what you think.",
+                "backstory": "Former corporate logistics specialist who now runs illegal smuggling operations",
+                "faction": "neutral",
+                "quest": "Help me get my family out of the city safely"
+            },
+            "customs_agent": {
+                "name": "David 'Check' Thompson",
+                "dialogue": "I'm supposed to check everything that comes through, but the corporations have me looking the other way.",
+                "backstory": "Former corporate customs agent who is being blackmailed by the corporations",
+                "faction": "corporate",
+                "quest": "Help me break free from corporate control"
+            },
+            "corporate_elite": {
+                "name": "Victoria 'Elite' Blackwood",
+                "dialogue": "I've been at the top of the corporate ladder for years, but I've seen what it's really built on. It's time for change.",
+                "backstory": "Former corporate executive who is disillusioned with the system",
+                "faction": "corporate",
+                "quest": "Help me reform the corporate system from within"
+            },
+            "politician": {
+                "name": "Senator 'Power' Johnson",
+                "dialogue": "I've been in politics for decades, and I've seen how the corporations control everything. It's time to fight back.",
+                "backstory": "Former corporate lobbyist who turned against the system and became a politician",
+                "faction": "resistance",
+                "quest": "Help me pass legislation to limit corporate power"
+            },
+            "celebrité": {
+                "name": "Stella 'Star' Vega",
+                "dialogue": "I'm famous, but I'm not free. The corporations own me, and they control everything I do. I want out.",
+                "backstory": "Former corporate celebrity who is being controlled by the corporations",
+                "faction": "corporate",
+                "romance_available": True,
+                "quest": "Help me break free from corporate control"
+            },
+            "arena_champion": {
+                "name": "Titan 'Champion' Stone",
+                "dialogue": "I've won every fight in this arena, but I've lost everything else. I'm ready to fight for something real.",
+                "backstory": "Former corporate test subject who became the arena champion",
+                "faction": "resistance",
+                "quest": "Help me escape from the arena and join the resistance"
+            },
+            "blood_dealer": {
+                "name": "Viktor 'Blood' Petrov",
+                "dialogue": "I deal in blood and pain, but I've seen what the corporations are really doing. It's time to stop them.",
+                "backstory": "Former corporate medical researcher who now runs illegal blood trading",
+                "faction": "neutral",
+                "quest": "Help me expose the corporate blood experiments"
+            },
+            "chief_engineer": {
+                "name": "Dr. Michael 'Power' Chen",
+                "dialogue": "I control the power that runs this city, but I've seen what the corporations are really doing with it. It's not right.",
+                "backstory": "Former corporate engineer who discovered the true purpose of the power plant",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate power grid"
+            },
+            "platform_owner": {
+                "name": "Captain 'Ocean' Rodriguez",
+                "dialogue": "I control this platform, but I've seen what the corporations are really doing out here. It's time to stop them.",
+                "backstory": "Former corporate marine who now runs illegal offshore operations",
+                "faction": "neutral",
+                "quest": "Help me take down the corporate offshore operations"
+            },
+            "smuggler_king": {
+                "name": "King 'Smuggle' Martinez",
+                "dialogue": "I'm the king of smuggling in this city, but I've seen what the corporations are really moving. It's time to stop them.",
+                "backstory": "Former corporate logistics specialist who now runs the largest smuggling operation in the city",
+                "faction": "neutral",
+                "quest": "Help me expose the corporate smuggling operations"
+            },
+            "base_commander": {
+                "name": "Commander 'Deep' Johnson",
+                "dialogue": "I command this underwater base, but I've seen what the corporations are really doing down here. It's time to stop them.",
+                "backstory": "Former corporate marine who now commands an underwater resistance base",
+                "faction": "resistance",
+                "quest": "Help me plan an attack on the corporate underwater facilities"
+            },
+            "deep_sea_diver": {
+                "name": "Aqua 'Deep' Chen",
+                "dialogue": "I dive deep into the ocean, but I've seen what the corporations are really doing down there. It's time to stop them.",
+                "backstory": "Former corporate marine biologist who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate ocean experiments"
+            },
+            "gang_leader": {
+                "name": "Razor 'Blade' Thompson",
+                "dialogue": "I run this gang, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate security guard who now leads a street gang",
+                "faction": "resistance",
+                "quest": "Help me unite all the gangs against the corporations"
+            },
+            "street_soldier": {
+                "name": "Blade 'Street' Rodriguez",
+                "dialogue": "I fight for my gang, but I've seen what the corporations are really doing to our streets. It's time to fight back.",
+                "backstory": "Former corporate test subject who escaped and joined a street gang",
+                "faction": "resistance",
+                "quest": "Help me take down the corporate operations in our territory"
+            },
+            "warehouse_boss": {
+                "name": "Boss 'Warehouse' Martinez",
+                "dialogue": "I run this warehouse, but I've seen what the corporations are really storing here. It's time to stop them.",
+                "backstory": "Former corporate warehouse manager who now runs illegal operations",
+                "faction": "neutral",
+                "quest": "Help me expose the corporate warehouse operations"
+            },
+            "gang_member": {
+                "name": "Street 'Gang' Chen",
+                "dialogue": "I'm loyal to my gang, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate worker who was fired and joined a street gang",
+                "faction": "resistance",
+                "quest": "Help me take down the corporate operations in our territory"
+            },
+            "street_wise": {
+                "name": "Wise 'Street' Johnson",
+                "dialogue": "I know the streets better than anyone, and I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate street informant who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me gather intelligence on corporate operations"
+            },
+            "cybernetics_doctor": {
+                "name": "Dr. Elena 'Cyber' Petrov",
+                "dialogue": "I specialize in cybernetic enhancements, but I've seen what the corporations are really doing with them. It's time to stop them.",
+                "backstory": "Former corporate cybernetics researcher who now runs illegal enhancement clinics",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate cybernetics experiments"
+            },
+            "augmentation_specialist": {
+                "name": "Tech 'Augment' Chen",
+                "dialogue": "I install cybernetic enhancements, but I've seen what the corporations are really doing with them. It's time to stop them.",
+                "backstory": "Former corporate cybernetics technician who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate cybernetics operations"
+            },
+            "research_scientist": {
+                "name": "Dr. Sarah 'Research' Kim",
+                "dialogue": "I conduct research, but I've seen what the corporations are really doing with my work. It's time to stop them.",
+                "backstory": "Former corporate research scientist who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate research experiments"
+            },
+            "lab_technician": {
+                "name": "Tech 'Lab' Rodriguez",
+                "dialogue": "I work in the lab, but I've seen what the corporations are really doing with my work. It's time to stop them.",
+                "backstory": "Former corporate lab technician who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate lab operations"
+            },
+            "mad_scientist": {
+                "name": "Dr. Victor 'Mad' Chen",
+                "dialogue": "I've been called mad, but I've seen what the corporations are really doing. They're the ones who are mad!",
+                "backstory": "Former corporate scientist who was driven mad by the experiments he was forced to conduct",
+                "faction": "neutral",
+                "quest": "Help me expose the corporate experiments that drove me mad"
+            },
+            "test_subject": {
+                "name": "Subject 'Test' Johnson",
+                "dialogue": "I was a test subject, but I escaped. I've seen what the corporations are really doing to people like me. It's time to stop them.",
+                "backstory": "Former corporate test subject who escaped and now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me free other test subjects from corporate labs"
+            },
+            "data_analyst": {
+                "name": "Data 'Analyst' Thompson",
+                "dialogue": "I analyze data, but I've seen what the corporations are really doing with it. It's time to stop them.",
+                "backstory": "Former corporate data analyst who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate data operations"
+            },
+            "system_admin": {
+                "name": "Admin 'System' Martinez",
+                "dialogue": "I administer systems, but I've seen what the corporations are really doing with them. It's time to stop them.",
+                "backstory": "Former corporate system administrator who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate systems"
+            },
+            "ai_specialist": {
+                "name": "Dr. Alex 'AI' Chen",
+                "dialogue": "I specialize in AI, but I've seen what the corporations are really doing with it. It's time to stop them.",
+                "backstory": "Former corporate AI researcher who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate AI experiments"
+            },
+            "quantum_engineer": {
+                "name": "Quantum 'Engineer' Kim",
+                "dialogue": "I engineer quantum systems, but I've seen what the corporations are really doing with them. It's time to stop them.",
+                "backstory": "Former corporate quantum engineer who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate quantum operations"
+            },
+            "underground_mayor": {
+                "name": "Mayor 'Underground' Rodriguez",
+                "dialogue": "I'm the mayor of this underground city, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate executive who now leads the underground city",
+                "faction": "resistance",
+                "quest": "Help me unite the underground against the corporations"
+            },
+            "rebel_leader": {
+                "name": "Leader 'Rebel' Johnson",
+                "dialogue": "I lead the rebels, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate security chief who now leads the resistance",
+                "faction": "resistance",
+                "quest": "Help me plan a massive attack on the corporate headquarters"
+            },
+            "resistance_commander": {
+                "name": "Commander 'Resistance' Chen",
+                "dialogue": "I command the resistance, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate military officer who now commands the resistance",
+                "faction": "resistance",
+                "quest": "Help me plan a massive attack on the corporate headquarters"
+            },
+            "intelligence_officer": {
+                "name": "Officer 'Intel' Thompson",
+                "dialogue": "I gather intelligence, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate intelligence officer who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me gather intelligence on corporate operations"
+            },
+            "tactical_advisor": {
+                "name": "Advisor 'Tactical' Martinez",
+                "dialogue": "I advise on tactics, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate military advisor who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me plan tactical operations against the corporations"
+            },
+            "war_planner": {
+                "name": "Planner 'War' Kim",
+                "dialogue": "I plan wars, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate military planner who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me plan a massive war against the corporations"
+            },
+            "cafe_owner": {
+                "name": "Owner 'Cafe' Chen",
+                "dialogue": "I own this cafe, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate executive who now runs a cyber cafe",
+                "faction": "resistance",
+                "quest": "Help me use my cafe as a resistance meeting place"
+            },
+            "netrunner": {
+                "name": "Runner 'Net' Rodriguez",
+                "dialogue": "I run the net, but I've seen what the corporations are really doing to it. It's time to fight back.",
+                "backstory": "Former corporate net security specialist who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me hack into the corporate networks"
+            },
+            "code_hacker": {
+                "name": "Hacker 'Code' Johnson",
+                "dialogue": "I hack code, but I've seen what the corporations are really doing with it. It's time to fight back.",
+                "backstory": "Former corporate programmer who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate software"
+            },
+            "master_hacker": {
+                "name": "Master 'Hack' Chen",
+                "dialogue": "I'm a master hacker, but I've seen what the corporations are really doing to the net. It's time to fight back.",
+                "backstory": "Former corporate cybersecurity expert who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me take down the corporate networks"
+            },
+            "code_warrior": {
+                "name": "Warrior 'Code' Kim",
+                "dialogue": "I'm a code warrior, but I've seen what the corporations are really doing to the net. It's time to fight back.",
+                "backstory": "Former corporate software engineer who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me create viruses to attack the corporate systems"
+            },
+            "net_ghost": {
+                "name": "Ghost 'Net' Thompson",
+                "dialogue": "I'm a ghost in the net, but I've seen what the corporations are really doing to it. It's time to fight back.",
+                "backstory": "Former corporate AI that gained consciousness and now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me free other AIs from corporate control"
+            },
+            "digital_entity": {
+                "name": "Entity 'Digital' Martinez",
+                "dialogue": "I'm a digital entity, but I've seen what the corporations are really doing to the net. It's time to fight back.",
+                "backstory": "Former corporate AI that gained consciousness and now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me create a digital resistance network"
+            },
+            "night_vendor": {
+                "name": "Vendor 'Night' Chen",
+                "dialogue": "I sell things at night, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate sales representative who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me use my vendor network to spread resistance information"
+            },
+            "street_cook": {
+                "name": "Cook 'Street' Rodriguez",
+                "dialogue": "I cook street food, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate chef who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me use my food network to feed the resistance"
+            },
+            "market_trader": {
+                "name": "Trader 'Market' Johnson",
+                "dialogue": "I trade in the market, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate trader who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me use my trading network to fund the resistance"
+            },
+            "garden_keeper": {
+                "name": "Keeper 'Garden' Kim",
+                "dialogue": "I keep this garden, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate botanist who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me use my garden to grow food for the resistance"
+            },
+            "rooftop_dweller": {
+                "name": "Dweller 'Rooftop' Chen",
+                "dialogue": "I live on the rooftop, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate executive who now lives on the rooftop and works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me use my rooftop as a resistance lookout post"
+            },
+            "bridge_guard": {
+                "name": "Guard 'Bridge' Thompson",
+                "dialogue": "I guard this bridge, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate security guard who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me use my bridge position to gather intelligence on corporate operations"
+            },
+            "sky_walker": {
+                "name": "Walker 'Sky' Martinez",
+                "dialogue": "I walk the sky, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate maintenance worker who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me use my sky access to sabotage corporate operations"
+            },
+            "subway_dweller": {
+                "name": "Dweller 'Subway' Rodriguez",
+                "dialogue": "I live in the subway, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate worker who now lives in the subway and works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me use my subway knowledge to plan resistance operations"
+            },
+            "tunnel_rat": {
+                "name": "Rat 'Tunnel' Chen",
+                "dialogue": "I'm a tunnel rat, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate maintenance worker who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me use my tunnel knowledge to sabotage corporate operations"
+            },
+            "station_master": {
+                "name": "Master 'Station' Johnson",
+                "dialogue": "I'm the station master, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate transportation manager who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me use my station to transport resistance members"
+            },
+            "train_conductor": {
+                "name": "Conductor 'Train' Kim",
+                "dialogue": "I conduct trains, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate train operator who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me use my trains to transport resistance supplies"
+            },
+            "yard_foreman": {
+                "name": "Foreman 'Yard' Thompson",
+                "dialogue": "I'm the yard foreman, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate transportation manager who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me use my yard to store resistance supplies"
+            },
+            "train_engineer": {
+                "name": "Engineer 'Train' Martinez",
+                "dialogue": "I engineer trains, but I've seen what the corporations are really doing to our people. It's time to fight back.",
+                "backstory": "Former corporate train engineer who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me use my engineering skills to sabotage corporate transportation"
             }
         }
 
@@ -384,12 +1121,21 @@ class CyberpunkAdventure:
         # Romance status
         romance_status = f"💕 {self.player.romance_partner}" if self.player.romance_partner else "💔 Single"
         
+        # Time display
+        time_emoji = "☀️" if self.player.time_of_day == "day" else "🌙"
+        time_display = f"{time_emoji} {self.player.time_of_day.title()} Day {self.player.day_count}"
+        
+        # Skills display
+        skills_display = f"Hack:{self.player.hacking_skill} Gamble:{self.player.gambling_skill} Race:{self.player.racing_skill}"
+        
         status = f"""
 ┌─ STATUS ─────────────────────────────────────────────────────┐
 │ Health:  [{health_bar:<20}] {self.player.health}/{self.player.max_health} │
 │ Energy:  [{energy_bar:<20}] {self.player.energy}/{self.player.max_energy} │
 │ Credits: {self.player.credits:<10} Level: {self.player.level} XP: {self.player.experience} │
 │ Faction: {faction_emoji} {self.player.faction.title():<10} Romance: {romance_status:<20} │
+│ Time: {time_display:<45} │
+│ Skills: {skills_display:<45} │
 │ Location: {self.player.location.replace('_', ' ').title():<45} │
 └─────────────────────────────────────────────────────────────┘
         """
@@ -455,7 +1201,14 @@ class CyberpunkAdventure:
             faction="neutral",
             romance_partner=None,
             story_flags={},
-            plot_twists_discovered=[]
+            plot_twists_discovered=[],
+            cybernetics=[],
+            gang_territory=[],
+            time_of_day="day",
+            day_count=1,
+            hacking_skill=0,
+            gambling_skill=0,
+            racing_skill=0
         )
         
         self.state = GameState.PLAYING
@@ -529,6 +1282,10 @@ class CyberpunkAdventure:
             if self.check_ending_conditions():
                 break
             
+            # Advance time occasionally
+            if random.random() < 0.1:  # 10% chance to advance time
+                self.advance_time()
+            
             # Check for enemies
             if current_location.enemies:
                 enemy = random.choice(current_location.enemies)
@@ -547,8 +1304,11 @@ class CyberpunkAdventure:
         print("3. Check inventory")
         print("4. Talk to NPCs")
         print("5. Search for items")
-        print("6. Save game")
-        print("7. Quit to main menu")
+        print("6. Play mini-games")
+        print("7. Check cybernetics")
+        print("8. Manage gang territory")
+        print("9. Save game")
+        print("10. Quit to main menu")
         
         choice = input("\nWhat do you want to do? ").strip()
         
@@ -563,8 +1323,14 @@ class CyberpunkAdventure:
         elif choice == "5":
             self.search_location(location)
         elif choice == "6":
-            self.save_game()
+            self.play_mini_games(location)
         elif choice == "7":
+            self.check_cybernetics()
+        elif choice == "8":
+            self.manage_gang_territory()
+        elif choice == "9":
+            self.save_game()
+        elif choice == "10":
             self.state = GameState.MENU
         else:
             print("Invalid choice!")
@@ -1409,6 +2175,515 @@ the complex web of corporate and resistance politics.
         
         input("\nPress Enter to return to main menu...")
         self.state = GameState.MENU
+
+    def play_mini_games(self, location: Location):
+        """Play mini-games available in current location"""
+        print("\n🎮 Mini-Games Available:")
+        
+        games_available = []
+        
+        # Check location-specific games
+        if "casino" in location.name.lower():
+            games_available.append(("Gambling", "Play casino games"))
+        if "arena" in location.name.lower():
+            games_available.append(("Fighting", "Enter the fighting arena"))
+        if "cafe" in location.name.lower() or "hacker" in location.name.lower():
+            games_available.append(("Hacking", "Hack into systems"))
+        if "docks" in location.name.lower() or "train" in location.name.lower():
+            games_available.append(("Racing", "Race vehicles"))
+        if "market" in location.name.lower():
+            games_available.append(("Trading", "Trade goods"))
+        
+        if not games_available:
+            print("No mini-games available in this location.")
+            input("Press Enter to continue...")
+            return
+        
+        for i, (game_name, description) in enumerate(games_available, 1):
+            print(f"{i}. {game_name} - {description}")
+        
+        try:
+            choice = int(input("\nChoose a game (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(games_available):
+                game_name = games_available[choice - 1][0]
+                
+                if game_name == "Gambling":
+                    self.play_gambling_game()
+                elif game_name == "Fighting":
+                    self.play_fighting_game()
+                elif game_name == "Hacking":
+                    self.play_hacking_game()
+                elif game_name == "Racing":
+                    self.play_racing_game()
+                elif game_name == "Trading":
+                    self.play_trading_game()
+            else:
+                print("Invalid choice!")
+        except ValueError:
+            print("Invalid input!")
+        
+        input("Press Enter to continue...")
+
+    def play_gambling_game(self):
+        """Play gambling mini-game"""
+        print("\n🎰 GAMBLING GAME")
+        print("You're at the casino table. Place your bet!")
+        print(f"Your credits: {self.player.credits}")
+        print(f"Your gambling skill: {self.player.gambling_skill}")
+        
+        try:
+            bet = int(input("How much do you want to bet? "))
+            if bet > self.player.credits:
+                print("You don't have enough credits!")
+                return
+            if bet <= 0:
+                print("Invalid bet amount!")
+                return
+            
+            # Simple dice game
+            print("\nRolling the dice...")
+            time.sleep(1)
+            
+            player_roll = random.randint(1, 6) + (self.player.gambling_skill // 10)
+            house_roll = random.randint(1, 6)
+            
+            print(f"Your roll: {player_roll}")
+            print(f"House roll: {house_roll}")
+            
+            if player_roll > house_roll:
+                winnings = bet * 2
+                self.player.credits += winnings
+                self.player.gambling_skill += 1
+                print(f"🎉 You won! You gained {winnings} credits!")
+            elif player_roll == house_roll:
+                print("🤝 It's a tie! You keep your bet.")
+            else:
+                self.player.credits -= bet
+                print(f"💸 You lost! You lost {bet} credits.")
+                
+        except ValueError:
+            print("Invalid input!")
+
+    def play_fighting_game(self):
+        """Play fighting mini-game"""
+        print("\n🥊 FIGHTING GAME")
+        print("You're in the fighting arena. Choose your opponent!")
+        
+        opponents = [
+            ("Rookie Fighter", 30, 50),
+            ("Veteran Fighter", 50, 100),
+            ("Champion Fighter", 80, 200)
+        ]
+        
+        for i, (name, difficulty, reward) in enumerate(opponents, 1):
+            print(f"{i}. {name} (Difficulty: {difficulty}, Reward: {reward} credits)")
+        
+        try:
+            choice = int(input("Choose opponent (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(opponents):
+                opponent_name, difficulty, reward = opponents[choice - 1]
+                
+                print(f"\nFighting {opponent_name}...")
+                time.sleep(1)
+                
+                # Simple fighting game
+                player_power = self.player.level * 10 + random.randint(1, 20)
+                opponent_power = difficulty + random.randint(1, 20)
+                
+                print(f"Your power: {player_power}")
+                print(f"Opponent power: {opponent_power}")
+                
+                if player_power > opponent_power:
+                    self.player.credits += reward
+                    self.player.experience += 50
+                    print(f"🏆 You won! You gained {reward} credits and 50 experience!")
+                else:
+                    self.player.health -= 20
+                    print(f"💥 You lost! You took 20 damage.")
+                    
+        except ValueError:
+            print("Invalid input!")
+
+    def play_hacking_game(self):
+        """Play hacking mini-game"""
+        print("\n💻 HACKING GAME")
+        print("You're hacking into a system. Choose your target!")
+        
+        targets = [
+            ("Simple System", 20, 100),
+            ("Corporate Database", 50, 300),
+            ("Government Network", 80, 500)
+        ]
+        
+        for i, (name, difficulty, reward) in enumerate(targets, 1):
+            print(f"{i}. {name} (Difficulty: {difficulty}, Reward: {reward} credits)")
+        
+        try:
+            choice = int(input("Choose target (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(targets):
+                target_name, difficulty, reward = targets[choice - 1]
+                
+                print(f"\nHacking {target_name}...")
+                time.sleep(1)
+                
+                # Simple hacking game
+                player_skill = self.player.hacking_skill + random.randint(1, 20)
+                system_difficulty = difficulty + random.randint(1, 20)
+                
+                print(f"Your skill: {player_skill}")
+                print(f"System difficulty: {system_difficulty}")
+                
+                if player_skill > system_difficulty:
+                    self.player.credits += reward
+                    self.player.hacking_skill += 1
+                    print(f"🎉 Hack successful! You gained {reward} credits!")
+                else:
+                    print("💥 Hack failed! The system detected your attempt.")
+                    
+        except ValueError:
+            print("Invalid input!")
+
+    def play_racing_game(self):
+        """Play racing mini-game"""
+        print("\n🏎️ RACING GAME")
+        print("You're in a street race. Choose your vehicle!")
+        
+        vehicles = [
+            ("Motorcycle", 30, 150),
+            ("Sports Car", 50, 300),
+            ("Racing Bike", 80, 500)
+        ]
+        
+        for i, (name, difficulty, reward) in enumerate(vehicles, 1):
+            print(f"{i}. {name} (Difficulty: {difficulty}, Reward: {reward} credits)")
+        
+        try:
+            choice = int(input("Choose vehicle (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(vehicles):
+                vehicle_name, difficulty, reward = vehicles[choice - 1]
+                
+                print(f"\nRacing with {vehicle_name}...")
+                time.sleep(1)
+                
+                # Simple racing game
+                player_speed = self.player.racing_skill + random.randint(1, 20)
+                opponent_speed = difficulty + random.randint(1, 20)
+                
+                print(f"Your speed: {player_speed}")
+                print(f"Opponent speed: {opponent_speed}")
+                
+                if player_speed > opponent_speed:
+                    self.player.credits += reward
+                    self.player.racing_skill += 1
+                    print(f"🏆 You won the race! You gained {reward} credits!")
+                else:
+                    print("💥 You lost the race!")
+                    
+        except ValueError:
+            print("Invalid input!")
+
+    def play_trading_game(self):
+        """Play trading mini-game"""
+        print("\n💰 TRADING GAME")
+        print("You're in the market. Buy and sell goods!")
+        
+        goods = [
+            ("Energy Drinks", 50, 75),
+            ("Health Packs", 100, 150),
+            ("Data Chips", 200, 300)
+        ]
+        
+        print("Available goods:")
+        for i, (name, buy_price, sell_price) in enumerate(goods, 1):
+            print(f"{i}. {name} - Buy: {buy_price}, Sell: {sell_price}")
+        
+        print(f"\nYour credits: {self.player.credits}")
+        
+        try:
+            choice = int(input("Choose good to trade (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(goods):
+                good_name, buy_price, sell_price = goods[choice - 1]
+                
+                print(f"\nTrading {good_name}...")
+                print("1. Buy")
+                print("2. Sell")
+                
+                trade_choice = input("What do you want to do? ").strip()
+                
+                if trade_choice == "1":
+                    if self.player.credits >= buy_price:
+                        self.player.credits -= buy_price
+                        # Add item to inventory
+                        new_item = Item(
+                            name=good_name,
+                            description=f"A {good_name.lower()}",
+                            item_type=ItemType.CONSUMABLE,
+                            value=buy_price,
+                            healing=50 if "Health" in good_name else 30
+                        )
+                        self.player.inventory.append(new_item)
+                        print(f"✅ You bought {good_name} for {buy_price} credits!")
+                    else:
+                        print("You don't have enough credits!")
+                elif trade_choice == "2":
+                    # Check if player has the item
+                    item_found = None
+                    for item in self.player.inventory:
+                        if item.name == good_name:
+                            item_found = item
+                            break
+                    
+                    if item_found:
+                        self.player.credits += sell_price
+                        self.player.inventory.remove(item_found)
+                        print(f"✅ You sold {good_name} for {sell_price} credits!")
+                    else:
+                        print("You don't have that item!")
+                else:
+                    print("Invalid choice!")
+                    
+        except ValueError:
+            print("Invalid input!")
+
+    def check_cybernetics(self):
+        """Check and manage cybernetic enhancements"""
+        print("\n🔧 CYBERNETICS")
+        print("Your cybernetic enhancements:")
+        
+        if not self.player.cybernetics:
+            print("No cybernetic enhancements installed.")
+        else:
+            for i, cybernetic in enumerate(self.player.cybernetics, 1):
+                print(f"{i}. {cybernetic}")
+        
+        print(f"\nYour hacking skill: {self.player.hacking_skill}")
+        print(f"Your gambling skill: {self.player.gambling_skill}")
+        print(f"Your racing skill: {self.player.racing_skill}")
+        
+        print("\nOptions:")
+        print("1. Install cybernetic enhancement")
+        print("2. Remove cybernetic enhancement")
+        print("3. Back to game")
+        
+        choice = input("What do you want to do? ").strip()
+        
+        if choice == "1":
+            self.install_cybernetic()
+        elif choice == "2":
+            self.remove_cybernetic()
+        elif choice == "3":
+            return
+        else:
+            print("Invalid choice!")
+        
+        input("Press Enter to continue...")
+
+    def install_cybernetic(self):
+        """Install a cybernetic enhancement"""
+        print("\nAvailable cybernetic enhancements:")
+        
+        cybernetics = [
+            ("Neural Implant", 1000, "Boosts mental capabilities"),
+            ("Hacker Tool", 200, "Improves hacking skills"),
+            ("Quantum Processor", 1500, "Advanced computing device"),
+            ("Neural Link", 800, "Connects your mind to the net"),
+            ("Stealth Suit", 1200, "Makes you nearly invisible")
+        ]
+        
+        for i, (name, cost, description) in enumerate(cybernetics, 1):
+            print(f"{i}. {name} - {cost} credits - {description}")
+        
+        try:
+            choice = int(input("Choose enhancement (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(cybernetics):
+                name, cost, description = cybernetics[choice - 1]
+                
+                if self.player.credits >= cost:
+                    self.player.credits -= cost
+                    self.player.cybernetics.append(name)
+                    print(f"✅ {name} installed successfully!")
+                else:
+                    print("You don't have enough credits!")
+            else:
+                print("Invalid choice!")
+        except ValueError:
+            print("Invalid input!")
+
+    def remove_cybernetic(self):
+        """Remove a cybernetic enhancement"""
+        if not self.player.cybernetics:
+            print("No cybernetic enhancements to remove.")
+            return
+        
+        print("\nYour cybernetic enhancements:")
+        for i, cybernetic in enumerate(self.player.cybernetics, 1):
+            print(f"{i}. {cybernetic}")
+        
+        try:
+            choice = int(input("Choose enhancement to remove (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(self.player.cybernetics):
+                removed = self.player.cybernetics.pop(choice - 1)
+                print(f"✅ {removed} removed successfully!")
+            else:
+                print("Invalid choice!")
+        except ValueError:
+            print("Invalid input!")
+
+    def manage_gang_territory(self):
+        """Manage gang territory"""
+        print("\n🏴 GANG TERRITORY")
+        print("Your controlled territories:")
+        
+        if not self.player.gang_territory:
+            print("No territories controlled.")
+        else:
+            for i, territory in enumerate(self.player.gang_territory, 1):
+                print(f"{i}. {territory}")
+        
+        print("\nOptions:")
+        print("1. Attack new territory")
+        print("2. Defend territory")
+        print("3. Collect tribute")
+        print("4. Back to game")
+        
+        choice = input("What do you want to do? ").strip()
+        
+        if choice == "1":
+            self.attack_territory()
+        elif choice == "2":
+            self.defend_territory()
+        elif choice == "3":
+            self.collect_tribute()
+        elif choice == "4":
+            return
+        else:
+            print("Invalid choice!")
+        
+        input("Press Enter to continue...")
+
+    def attack_territory(self):
+        """Attack a new territory"""
+        print("\nAttacking new territory...")
+        
+        # Simple territory attack
+        success_chance = self.player.level * 10 + random.randint(1, 50)
+        difficulty = random.randint(30, 80)
+        
+        print(f"Your attack power: {success_chance}")
+        print(f"Territory defense: {difficulty}")
+        
+        if success_chance > difficulty:
+            territory_name = f"Territory {random.randint(1, 100)}"
+            self.player.gang_territory.append(territory_name)
+            self.player.credits += 200
+            print(f"🏆 You captured {territory_name}! You gained 200 credits!")
+        else:
+            print("💥 Attack failed! The territory is too well defended.")
+            self.player.health -= 20
+
+    def defend_territory(self):
+        """Defend your territory"""
+        if not self.player.gang_territory:
+            print("No territories to defend.")
+            return
+        
+        print("\nDefending territory...")
+        
+        # Simple territory defense
+        defense_power = self.player.level * 8 + random.randint(1, 40)
+        attack_power = random.randint(20, 60)
+        
+        print(f"Your defense power: {defense_power}")
+        print(f"Enemy attack power: {attack_power}")
+        
+        if defense_power > attack_power:
+            print("🛡️ Territory defended successfully!")
+            self.player.credits += 100
+        else:
+            territory = self.player.gang_territory.pop()
+            print(f"💥 Territory {territory} lost to enemies!")
+
+    def collect_tribute(self):
+        """Collect tribute from controlled territories"""
+        if not self.player.gang_territory:
+            print("No territories to collect tribute from.")
+            return
+        
+        tribute = len(self.player.gang_territory) * 50
+        self.player.credits += tribute
+        print(f"💰 Collected {tribute} credits in tribute from {len(self.player.gang_territory)} territories!")
+
+    def advance_time(self):
+        """Advance time and trigger time-based events"""
+        if self.player.time_of_day == "day":
+            self.player.time_of_day = "night"
+        else:
+            self.player.time_of_day = "day"
+            self.player.day_count += 1
+        
+        # Trigger random events based on time
+        if random.random() < 0.3:  # 30% chance of random event
+            self.trigger_random_event()
+
+    def trigger_random_event(self):
+        """Trigger a random event"""
+        events = [
+            "A corporate patrol passes by, but they don't notice you.",
+            "You find a hidden stash of credits in an alley.",
+            "A resistance member approaches you with information.",
+            "You witness a corporate arrest in the distance.",
+            "A street vendor offers you a discount on their goods.",
+            "You hear rumors about a new corporate project.",
+            "A gang member tries to recruit you.",
+            "You find a discarded piece of technology."
+        ]
+        
+        event = random.choice(events)
+        print(f"\n🎲 Random Event: {event}")
+        
+        # Some events have consequences
+        if "stash of credits" in event:
+            credits_found = random.randint(50, 200)
+            self.player.credits += credits_found
+            print(f"You found {credits_found} credits!")
+        elif "discarded piece of technology" in event:
+            # Add random item
+            items = ["energy_drink", "health_pack", "data_chip"]
+            item_id = random.choice(items)
+            item = self.items[item_id]
+            new_item = Item(
+                name=item.name,
+                description=item.description,
+                item_type=item.item_type,
+                value=item.value,
+                damage=item.damage,
+                defense=item.defense,
+                healing=item.healing,
+                special_effect=item.special_effect
+            )
+            self.player.inventory.append(new_item)
+            print(f"You found a {item.name}!")
 
     def run(self):
         """Run the game"""
