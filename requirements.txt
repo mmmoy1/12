@@ -1,0 +1,2 @@
+# Cyberpunk Adventure - Text-Based RPG
+# No external dependencies required - uses only Python standard library
