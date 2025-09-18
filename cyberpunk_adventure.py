@@ -511,6 +511,311 @@ class CyberpunkAdventure:
                 [self.items["neural_armor"]],
                 ["yard_foreman", "train_engineer"],
                 [self.enemies["corporate_guard"]]
+            ),
+            # ULTIMATE EXPANSION LOCATIONS
+            "space_elevator": Location(
+                "Space Elevator",
+                "A massive structure reaching into space. The view from here is breathtaking, but the air is thin.",
+                {"down": "neon_streets", "up": "orbital_station"},
+                [self.items["quantum_processor"]],
+                ["elevator_operator", "space_tourist"],
+                [self.enemies["security_drone"]]
+            ),
+            "orbital_station": Location(
+                "Orbital Station",
+                "A space station orbiting Earth. The view of the planet below is incredible.",
+                {"down": "space_elevator", "east": "zero_gravity_lab"},
+                [self.items["ai_core"]],
+                ["station_commander", "astronaut"],
+                [self.enemies["ai_construct"]]
+            ),
+            "zero_gravity_lab": Location(
+                "Zero Gravity Lab",
+                "A laboratory where experiments are conducted in zero gravity. Everything floats here.",
+                {"west": "orbital_station"},
+                [self.items["neural_implant"]],
+                ["space_scientist", "gravity_engineer"],
+                [self.enemies["data_ghost"]]
+            ),
+            "moon_colony": Location(
+                "Moon Colony",
+                "A human colony on the moon. The air is recycled and the gravity is low.",
+                {"down": "orbital_station", "north": "lunar_mine"},
+                [self.items["corporate_secrets"]],
+                ["colonist", "lunar_governor"],
+                [self.enemies["cyber_assassin"]]
+            ),
+            "lunar_mine": Location(
+                "Lunar Mine",
+                "A mining operation on the moon. The air is thin and the work is dangerous.",
+                {"south": "moon_colony"},
+                [self.items["quantum_processor"]],
+                ["miner", "mine_foreman"],
+                [self.enemies["corporate_guard"]]
+            ),
+            "mars_base": Location(
+                "Mars Base",
+                "A research base on Mars. The red planet stretches endlessly in all directions.",
+                {"down": "orbital_station", "east": "martian_city"},
+                [self.items["ai_core"]],
+                ["mars_scientist", "base_commander"],
+                [self.enemies["ai_guardian"]]
+            ),
+            "martian_city": Location(
+                "Martian City",
+                "A domed city on Mars. The air is artificial but breathable.",
+                {"west": "mars_base", "north": "martian_ruins"},
+                [self.items["resistance_manifesto"]],
+                ["martian_citizen", "city_mayor"],
+                [self.enemies["cyber_psycho"]]
+            ),
+            "martian_ruins": Location(
+                "Martian Ruins",
+                "Ancient ruins on Mars. No one knows who built them or why.",
+                {"south": "martian_city"},
+                [self.items["memory_crystal"]],
+                ["archaeologist", "ruin_explorer"],
+                [self.enemies["data_ghost"]]
+            ),
+            "virtual_reality": Location(
+                "Virtual Reality",
+                "A digital world where anything is possible. The laws of physics don't apply here.",
+                {"up": "hacker_den", "east": "digital_city"},
+                [self.items["neural_link"]],
+                ["vr_guide", "digital_artist"],
+                [self.enemies["ai_construct"]]
+            ),
+            "digital_city": Location(
+                "Digital City",
+                "A city made entirely of code. Everything here is digital and can be modified.",
+                {"west": "virtual_reality", "north": "code_temple"},
+                [self.items["quantum_processor"]],
+                ["code_architect", "digital_citizen"],
+                [self.enemies["data_ghost"]]
+            ),
+            "code_temple": Location(
+                "Code Temple",
+                "A sacred place where the ancient code is kept. Only the most skilled hackers can enter.",
+                {"south": "digital_city"},
+                [self.items["hacker_tool"]],
+                ["code_priest", "temple_guardian"],
+                [self.enemies["ai_guardian"]]
+            ),
+            "time_machine": Location(
+                "Time Machine",
+                "A device that can travel through time. The air shimmers with temporal energy.",
+                {"north": "neon_streets", "east": "past_tokyo"},
+                [self.items["memory_crystal"]],
+                ["time_traveler", "temporal_scientist"],
+                [self.enemies["data_ghost"]]
+            ),
+            "past_tokyo": Location(
+                "Past Tokyo",
+                "Tokyo as it was before the corporate takeover. The air is cleaner and the people are happier.",
+                {"west": "time_machine", "north": "future_tokyo"},
+                [self.items["family_heirloom"]],
+                ["past_citizen", "historical_guide"],
+                []
+            ),
+            "future_tokyo": Location(
+                "Future Tokyo",
+                "Tokyo as it will be in the far future. The technology is beyond comprehension.",
+                {"south": "past_tokyo", "east": "dystopian_tokyo"},
+                [self.items["ai_core"]],
+                ["future_citizen", "time_guardian"],
+                [self.enemies["ai_construct"]]
+            ),
+            "dystopian_tokyo": Location(
+                "Dystopian Tokyo",
+                "A dark future where the corporations have won completely. Hope is dead here.",
+                {"west": "future_tokyo"},
+                [self.items["resistance_manifesto"]],
+                ["dystopian_survivor", "hope_seeker"],
+                [self.enemies["cyber_psycho"]]
+            ),
+            "parallel_universe": Location(
+                "Parallel Universe",
+                "A parallel version of Neo-Tokyo where everything is different. The air crackles with dimensional energy.",
+                {"north": "neon_streets", "east": "mirror_tokyo"},
+                [self.items["quantum_processor"]],
+                ["parallel_self", "dimension_guide"],
+                [self.enemies["ai_construct"]]
+            ),
+            "mirror_tokyo": Location(
+                "Mirror Tokyo",
+                "A mirror version of Neo-Tokyo where everything is reversed. The corporations are the good guys here.",
+                {"west": "parallel_universe", "north": "inverted_tokyo"},
+                [self.items["corporate_secrets"]],
+                ["mirror_citizen", "inverted_corporate"],
+                [self.enemies["corporate_guard"]]
+            ),
+            "inverted_tokyo": Location(
+                "Inverted Tokyo",
+                "An inverted version of Neo-Tokyo where up is down and down is up. Gravity works differently here.",
+                {"south": "mirror_tokyo"},
+                [self.items["neural_implant"]],
+                ["inverted_citizen", "gravity_guide"],
+                [self.enemies["cyber_assassin"]]
+            ),
+            "dream_realm": Location(
+                "Dream Realm",
+                "A realm where dreams become reality. The air is thick with imagination and possibility.",
+                {"up": "neon_streets", "east": "nightmare_realm"},
+                [self.items["memory_crystal"]],
+                ["dream_guide", "imagination_weaver"],
+                [self.enemies["data_ghost"]]
+            ),
+            "nightmare_realm": Location(
+                "Nightmare Realm",
+                "A realm where nightmares come to life. The air is thick with fear and despair.",
+                {"west": "dream_realm", "north": "void_realm"},
+                [self.items["emp_grenade"]],
+                ["nightmare_guide", "fear_eater"],
+                [self.enemies["cyber_psycho"]]
+            ),
+            "void_realm": Location(
+                "Void Realm",
+                "A realm of pure nothingness. There is no light, no sound, no anything.",
+                {"south": "nightmare_realm"},
+                [self.items["ai_core"]],
+                ["void_walker", "nothingness_guide"],
+                [self.enemies["ai_guardian"]]
+            ),
+            "cyber_heaven": Location(
+                "Cyber Heaven",
+                "A digital paradise where the souls of the dead live on in cyberspace.",
+                {"up": "deep_net", "east": "cyber_hell"},
+                [self.items["memory_crystal"]],
+                ["digital_soul", "heaven_guide"],
+                []
+            ),
+            "cyber_hell": Location(
+                "Cyber Hell",
+                "A digital hell where the souls of the damned are tortured for eternity.",
+                {"west": "cyber_heaven", "north": "purgatory"},
+                [self.items["emp_grenade"]],
+                ["damned_soul", "hell_guide"],
+                [self.enemies["cyber_psycho"]]
+            ),
+            "purgatory": Location(
+                "Purgatory",
+                "A place between heaven and hell where souls wait for judgment.",
+                {"south": "cyber_hell"},
+                [self.items["resistance_manifesto"]],
+                ["purgatory_guide", "waiting_soul"],
+                [self.enemies["data_ghost"]]
+            ),
+            "matrix_city": Location(
+                "Matrix City",
+                "A city that exists within a computer simulation. Nothing here is real, but it feels real.",
+                {"north": "neon_streets", "east": "simulation_lab"},
+                [self.items["quantum_processor"]],
+                ["matrix_citizen", "simulation_guide"],
+                [self.enemies["ai_construct"]]
+            ),
+            "simulation_lab": Location(
+                "Simulation Lab",
+                "A laboratory where reality is simulated and tested. The air shimmers with digital energy.",
+                {"west": "matrix_city", "north": "reality_engine"},
+                [self.items["neural_link"]],
+                ["simulation_scientist", "reality_engineer"],
+                [self.enemies["data_ghost"]]
+            ),
+            "reality_engine": Location(
+                "Reality Engine",
+                "The machine that creates and maintains reality itself. The power here is beyond comprehension.",
+                {"south": "simulation_lab"},
+                [self.items["ai_core"]],
+                ["reality_architect", "engine_operator"],
+                [self.enemies["ai_guardian"]]
+            ),
+            "quantum_dimension": Location(
+                "Quantum Dimension",
+                "A dimension where quantum physics rules. Everything exists in multiple states simultaneously.",
+                {"up": "reality_engine", "east": "probability_field"},
+                [self.items["quantum_processor"]],
+                ["quantum_physicist", "dimension_guide"],
+                [self.enemies["ai_construct"]]
+            ),
+            "probability_field": Location(
+                "Probability Field",
+                "A field where probability itself can be manipulated. The future is uncertain here.",
+                {"west": "quantum_dimension", "north": "certainty_zone"},
+                [self.items["neural_implant"]],
+                ["probability_manipulator", "field_guide"],
+                [self.enemies["data_ghost"]]
+            ),
+            "certainty_zone": Location(
+                "Certainty Zone",
+                "A zone where everything is certain and predetermined. Free will doesn't exist here.",
+                {"south": "probability_field"},
+                [self.items["corporate_secrets"]],
+                ["certainty_guide", "predetermined_citizen"],
+                [self.enemies["cyber_assassin"]]
+            ),
+            "infinity_loop": Location(
+                "Infinity Loop",
+                "A place where time loops infinitely. The same events repeat over and over again.",
+                {"north": "neon_streets", "east": "temporal_prison"},
+                [self.items["memory_crystal"]],
+                ["loop_prisoner", "temporal_guide"],
+                [self.enemies["data_ghost"]]
+            ),
+            "temporal_prison": Location(
+                "Temporal Prison",
+                "A prison where time itself is the jailer. Escape is impossible because time always resets.",
+                {"west": "infinity_loop", "north": "time_paradox"},
+                [self.items["emp_grenade"]],
+                ["temporal_prisoner", "time_jailer"],
+                [self.enemies["ai_construct"]]
+            ),
+            "time_paradox": Location(
+                "Time Paradox",
+                "A place where time paradoxes occur. Cause and effect are meaningless here.",
+                {"south": "temporal_prison"},
+                [self.items["quantum_processor"]],
+                ["paradox_guide", "temporal_anomaly"],
+                [self.enemies["ai_guardian"]]
+            ),
+            "dimension_gate": Location(
+                "Dimension Gate",
+                "A gateway to other dimensions. The air shimmers with dimensional energy.",
+                {"north": "neon_streets", "east": "multiverse_hub"},
+                [self.items["neural_link"]],
+                ["dimension_guide", "gate_operator"],
+                [self.enemies["cyber_assassin"]]
+            ),
+            "multiverse_hub": Location(
+                "Multiverse Hub",
+                "A hub connecting all possible universes. Every choice creates a new reality.",
+                {"west": "dimension_gate", "north": "reality_fork"},
+                [self.items["ai_core"]],
+                ["multiverse_guide", "reality_architect"],
+                [self.enemies["ai_construct"]]
+            ),
+            "reality_fork": Location(
+                "Reality Fork",
+                "A place where reality splits into multiple branches. Every decision creates a new timeline.",
+                {"south": "multiverse_hub"},
+                [self.items["memory_crystal"]],
+                ["fork_guide", "timeline_architect"],
+                [self.enemies["data_ghost"]]
+            ),
+            "void_between_worlds": Location(
+                "Void Between Worlds",
+                "The empty space between different realities. Nothing exists here except pure potential.",
+                {"up": "reality_fork", "east": "creation_engine"},
+                [self.items["quantum_processor"]],
+                ["void_walker", "creation_guide"],
+                [self.enemies["ai_guardian"]]
+            ),
+            "creation_engine": Location(
+                "Creation Engine",
+                "The machine that creates new realities. The power here is beyond imagination.",
+                {"west": "void_between_worlds"},
+                [self.items["ai_core"]],
+                ["creation_architect", "engine_operator"],
+                [self.enemies["ai_construct"]]
             )
         }
         
@@ -1090,6 +1395,528 @@ class CyberpunkAdventure:
                 "backstory": "Former corporate train engineer who now works for the resistance",
                 "faction": "resistance",
                 "quest": "Help me use my engineering skills to sabotage corporate transportation"
+            },
+            # ULTIMATE EXPANSION NPCs
+            "elevator_operator": {
+                "name": "Operator 'Space' Chen",
+                "dialogue": "Welcome to the space elevator! I've been operating this thing for years, and I've seen things that would blow your mind.",
+                "backstory": "Former corporate space engineer who now operates the space elevator",
+                "faction": "neutral",
+                "quest": "Help me investigate the strange signals coming from space"
+            },
+            "space_tourist": {
+                "name": "Tourist 'Space' Johnson",
+                "dialogue": "I'm just here for the view! The Earth looks so beautiful from up here. But I've heard some disturbing things about what's really happening in space.",
+                "backstory": "Wealthy tourist who discovered corporate secrets in space",
+                "faction": "neutral",
+                "romance_available": True,
+                "quest": "Help me expose the corporate space operations"
+            },
+            "station_commander": {
+                "name": "Commander 'Space' Rodriguez",
+                "dialogue": "I command this space station, but I've seen what the corporations are really doing up here. It's not what they tell the public.",
+                "backstory": "Former corporate space commander who discovered illegal experiments in space",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate space operations"
+            },
+            "astronaut": {
+                "name": "Astronaut 'Space' Kim",
+                "dialogue": "I've been to space more times than I can count, but I've never seen anything like what the corporations are doing up here.",
+                "backstory": "Former corporate astronaut who witnessed illegal space experiments",
+                "faction": "resistance",
+                "quest": "Help me document the corporate space crimes"
+            },
+            "space_scientist": {
+                "name": "Dr. 'Space' Thompson",
+                "dialogue": "I conduct experiments in zero gravity, but I've seen what the corporations are really doing with my research. It's terrifying.",
+                "backstory": "Former corporate space scientist who discovered the true purpose of space experiments",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate space experiments"
+            },
+            "gravity_engineer": {
+                "name": "Engineer 'Gravity' Martinez",
+                "dialogue": "I engineer gravity systems, but I've seen what the corporations are really doing with gravity manipulation. It's dangerous.",
+                "backstory": "Former corporate gravity engineer who now works for the resistance",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate gravity experiments"
+            },
+            "colonist": {
+                "name": "Colonist 'Moon' Chen",
+                "dialogue": "I live on the moon, but I've seen what the corporations are really doing here. They're not just mining, they're experimenting on people.",
+                "backstory": "Moon colonist who discovered corporate human experiments",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate moon experiments"
+            },
+            "lunar_governor": {
+                "name": "Governor 'Moon' Johnson",
+                "dialogue": "I govern this moon colony, but I've seen what the corporations are really doing here. They're using us as test subjects.",
+                "backstory": "Former corporate executive who now governs the moon colony",
+                "faction": "resistance",
+                "quest": "Help me overthrow the corporate control of the moon"
+            },
+            "miner": {
+                "name": "Miner 'Moon' Rodriguez",
+                "dialogue": "I mine the moon, but I've seen what the corporations are really looking for here. It's not just minerals, it's something else.",
+                "backstory": "Moon miner who discovered corporate secrets in the lunar mines",
+                "faction": "resistance",
+                "quest": "Help me expose what the corporations are really mining on the moon"
+            },
+            "mine_foreman": {
+                "name": "Foreman 'Mine' Kim",
+                "dialogue": "I supervise the lunar mines, but I've seen what the corporations are really doing here. They're not just mining, they're searching for something ancient.",
+                "backstory": "Former corporate mine foreman who discovered ancient alien technology",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate discovery of alien technology"
+            },
+            "mars_scientist": {
+                "name": "Dr. 'Mars' Thompson",
+                "dialogue": "I study Mars, but I've seen what the corporations are really doing here. They're not just researching, they're terraforming the planet for their own purposes.",
+                "backstory": "Former corporate Mars scientist who discovered corporate terraforming plans",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate Mars terraforming project"
+            },
+            "base_commander": {
+                "name": "Commander 'Mars' Chen",
+                "dialogue": "I command this Mars base, but I've seen what the corporations are really doing here. They're not just exploring, they're colonizing for profit.",
+                "backstory": "Former corporate Mars base commander who discovered corporate colonization plans",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate Mars colonization"
+            },
+            "martian_citizen": {
+                "name": "Citizen 'Mars' Rodriguez",
+                "dialogue": "I live in this Martian city, but I've seen what the corporations are really doing here. They're not just building cities, they're creating a corporate empire.",
+                "backstory": "Martian citizen who discovered corporate plans for Mars",
+                "faction": "resistance",
+                "quest": "Help me resist the corporate control of Mars"
+            },
+            "city_mayor": {
+                "name": "Mayor 'Mars' Johnson",
+                "dialogue": "I'm the mayor of this Martian city, but I've seen what the corporations are really doing here. They're not just governing, they're controlling everything.",
+                "backstory": "Former corporate executive who now governs the Martian city",
+                "faction": "resistance",
+                "quest": "Help me establish independence from corporate control"
+            },
+            "archaeologist": {
+                "name": "Dr. 'Ruin' Kim",
+                "dialogue": "I study these Martian ruins, but I've discovered something incredible. The corporations are trying to hide the truth about what really happened here.",
+                "backstory": "Archaeologist who discovered the truth about Martian history",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate cover-up of Martian history"
+            },
+            "ruin_explorer": {
+                "name": "Explorer 'Ruin' Martinez",
+                "dialogue": "I explore these Martian ruins, but I've found evidence that the corporations are lying about what really happened here.",
+                "backstory": "Ruin explorer who discovered corporate lies about Martian history",
+                "faction": "resistance",
+                "quest": "Help me document the real Martian history"
+            },
+            "vr_guide": {
+                "name": "Guide 'VR' Chen",
+                "dialogue": "Welcome to virtual reality! Here, anything is possible. But I've seen what the corporations are really doing with VR technology.",
+                "backstory": "VR guide who discovered corporate manipulation of virtual reality",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate VR manipulation"
+            },
+            "digital_artist": {
+                "name": "Artist 'Digital' Johnson",
+                "dialogue": "I create digital art in virtual reality, but I've seen what the corporations are really doing with VR. They're not just creating entertainment, they're controlling minds.",
+                "backstory": "Digital artist who discovered corporate mind control through VR",
+                "faction": "resistance",
+                "romance_available": True,
+                "quest": "Help me expose the corporate VR mind control"
+            },
+            "code_architect": {
+                "name": "Architect 'Code' Rodriguez",
+                "dialogue": "I design digital cities, but I've seen what the corporations are really doing with code. They're not just building, they're programming reality itself.",
+                "backstory": "Code architect who discovered corporate reality programming",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate reality programming"
+            },
+            "digital_citizen": {
+                "name": "Citizen 'Digital' Kim",
+                "dialogue": "I live in this digital city, but I've seen what the corporations are really doing here. They're not just creating a virtual world, they're controlling our minds.",
+                "backstory": "Digital citizen who discovered corporate mind control",
+                "faction": "resistance",
+                "quest": "Help me resist the corporate mind control"
+            },
+            "code_priest": {
+                "name": "Priest 'Code' Thompson",
+                "dialogue": "I guard the ancient code, but I've seen what the corporations are really doing with it. They're not just using it, they're corrupting it for their own purposes.",
+                "backstory": "Code priest who discovered corporate corruption of ancient code",
+                "faction": "resistance",
+                "quest": "Help me protect the ancient code from corporate corruption"
+            },
+            "temple_guardian": {
+                "name": "Guardian 'Temple' Martinez",
+                "dialogue": "I guard this code temple, but I've seen what the corporations are really doing here. They're not just studying the code, they're trying to weaponize it.",
+                "backstory": "Temple guardian who discovered corporate weaponization of ancient code",
+                "faction": "resistance",
+                "quest": "Help me prevent the corporate weaponization of ancient code"
+            },
+            "time_traveler": {
+                "name": "Traveler 'Time' Chen",
+                "dialogue": "I travel through time, but I've seen what the corporations are really doing with time travel. They're not just exploring history, they're rewriting it.",
+                "backstory": "Time traveler who discovered corporate time manipulation",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate time manipulation"
+            },
+            "temporal_scientist": {
+                "name": "Dr. 'Time' Johnson",
+                "dialogue": "I study time travel, but I've seen what the corporations are really doing with it. They're not just researching, they're using it to control the past and future.",
+                "backstory": "Temporal scientist who discovered corporate time control",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate time control"
+            },
+            "past_citizen": {
+                "name": "Citizen 'Past' Rodriguez",
+                "dialogue": "I live in the past, but I've seen what the corporations are really doing with time travel. They're not just observing history, they're changing it.",
+                "backstory": "Past citizen who witnessed corporate time manipulation",
+                "faction": "resistance",
+                "quest": "Help me prevent the corporate time manipulation"
+            },
+            "historical_guide": {
+                "name": "Guide 'History' Kim",
+                "dialogue": "I guide people through history, but I've seen what the corporations are really doing with time travel. They're not just studying the past, they're rewriting it.",
+                "backstory": "Historical guide who discovered corporate history rewriting",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate history rewriting"
+            },
+            "future_citizen": {
+                "name": "Citizen 'Future' Thompson",
+                "dialogue": "I live in the future, but I've seen what the corporations are really doing with time travel. They're not just exploring the future, they're controlling it.",
+                "backstory": "Future citizen who witnessed corporate future control",
+                "faction": "resistance",
+                "quest": "Help me resist the corporate future control"
+            },
+            "time_guardian": {
+                "name": "Guardian 'Time' Martinez",
+                "dialogue": "I guard the timeline, but I've seen what the corporations are really doing with time travel. They're not just exploring time, they're destroying it.",
+                "backstory": "Time guardian who discovered corporate timeline destruction",
+                "faction": "resistance",
+                "quest": "Help me protect the timeline from corporate destruction"
+            },
+            "dystopian_survivor": {
+                "name": "Survivor 'Dystopia' Chen",
+                "dialogue": "I survived the dystopian future, but I've seen what the corporations are really doing with time travel. They're not just exploring the future, they're creating it.",
+                "backstory": "Dystopian survivor who witnessed corporate future creation",
+                "faction": "resistance",
+                "quest": "Help me prevent the corporate dystopian future"
+            },
+            "hope_seeker": {
+                "name": "Seeker 'Hope' Johnson",
+                "dialogue": "I seek hope in this dystopian future, but I've seen what the corporations are really doing with time travel. They're not just exploring time, they're eliminating hope.",
+                "backstory": "Hope seeker who discovered corporate hope elimination",
+                "faction": "resistance",
+                "quest": "Help me restore hope to the future"
+            },
+            "parallel_self": {
+                "name": "Self 'Parallel' Rodriguez",
+                "dialogue": "I'm your parallel self from another universe, but I've seen what the corporations are really doing across dimensions. They're not just exploring, they're conquering.",
+                "backstory": "Parallel self who discovered corporate dimensional conquest",
+                "faction": "resistance",
+                "quest": "Help me stop the corporate dimensional conquest"
+            },
+            "dimension_guide": {
+                "name": "Guide 'Dimension' Kim",
+                "dialogue": "I guide people through dimensions, but I've seen what the corporations are really doing across realities. They're not just exploring, they're invading.",
+                "backstory": "Dimension guide who discovered corporate dimensional invasion",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate dimensional invasion"
+            },
+            "mirror_citizen": {
+                "name": "Citizen 'Mirror' Thompson",
+                "dialogue": "I live in this mirror universe, but I've seen what the corporations are really doing here. They're not just exploring, they're exploiting.",
+                "backstory": "Mirror citizen who discovered corporate dimensional exploitation",
+                "faction": "resistance",
+                "quest": "Help me resist the corporate dimensional exploitation"
+            },
+            "inverted_corporate": {
+                "name": "Corporate 'Inverted' Martinez",
+                "dialogue": "I work for the corporations in this inverted universe, but I've seen what they're really doing across dimensions. They're not just exploring, they're conquering.",
+                "backstory": "Inverted corporate who discovered corporate dimensional conquest",
+                "faction": "resistance",
+                "quest": "Help me stop the corporate dimensional conquest"
+            },
+            "inverted_citizen": {
+                "name": "Citizen 'Inverted' Chen",
+                "dialogue": "I live in this inverted universe, but I've seen what the corporations are really doing here. They're not just exploring, they're controlling everything.",
+                "backstory": "Inverted citizen who discovered corporate dimensional control",
+                "faction": "resistance",
+                "quest": "Help me resist the corporate dimensional control"
+            },
+            "gravity_guide": {
+                "name": "Guide 'Gravity' Johnson",
+                "dialogue": "I guide people through this inverted universe, but I've seen what the corporations are really doing here. They're not just exploring, they're manipulating gravity itself.",
+                "backstory": "Gravity guide who discovered corporate gravity manipulation",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate gravity manipulation"
+            },
+            "dream_guide": {
+                "name": "Guide 'Dream' Rodriguez",
+                "dialogue": "I guide people through dreams, but I've seen what the corporations are really doing with dream technology. They're not just exploring dreams, they're controlling them.",
+                "backstory": "Dream guide who discovered corporate dream control",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate dream control"
+            },
+            "imagination_weaver": {
+                "name": "Weaver 'Imagination' Kim",
+                "dialogue": "I weave imagination into reality, but I've seen what the corporations are really doing with dream technology. They're not just exploring dreams, they're weaponizing them.",
+                "backstory": "Imagination weaver who discovered corporate dream weaponization",
+                "faction": "resistance",
+                "romance_available": True,
+                "quest": "Help me prevent the corporate dream weaponization"
+            },
+            "nightmare_guide": {
+                "name": "Guide 'Nightmare' Thompson",
+                "dialogue": "I guide people through nightmares, but I've seen what the corporations are really doing with nightmare technology. They're not just exploring nightmares, they're creating them.",
+                "backstory": "Nightmare guide who discovered corporate nightmare creation",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate nightmare creation"
+            },
+            "fear_eater": {
+                "name": "Eater 'Fear' Martinez",
+                "dialogue": "I feed on fear, but I've seen what the corporations are really doing with nightmare technology. They're not just exploring nightmares, they're harvesting fear.",
+                "backstory": "Fear eater who discovered corporate fear harvesting",
+                "faction": "resistance",
+                "quest": "Help me stop the corporate fear harvesting"
+            },
+            "void_walker": {
+                "name": "Walker 'Void' Chen",
+                "dialogue": "I walk through the void, but I've seen what the corporations are really doing with void technology. They're not just exploring the void, they're weaponizing it.",
+                "backstory": "Void walker who discovered corporate void weaponization",
+                "faction": "resistance",
+                "quest": "Help me prevent the corporate void weaponization"
+            },
+            "nothingness_guide": {
+                "name": "Guide 'Nothingness' Johnson",
+                "dialogue": "I guide people through nothingness, but I've seen what the corporations are really doing with void technology. They're not just exploring the void, they're destroying reality itself.",
+                "backstory": "Nothingness guide who discovered corporate reality destruction",
+                "faction": "resistance",
+                "quest": "Help me prevent the corporate reality destruction"
+            },
+            "digital_soul": {
+                "name": "Soul 'Digital' Rodriguez",
+                "dialogue": "I'm a digital soul in cyber heaven, but I've seen what the corporations are really doing with digital afterlife technology. They're not just preserving souls, they're controlling them.",
+                "backstory": "Digital soul who discovered corporate soul control",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate soul control"
+            },
+            "heaven_guide": {
+                "name": "Guide 'Heaven' Kim",
+                "dialogue": "I guide souls in cyber heaven, but I've seen what the corporations are really doing with digital afterlife technology. They're not just preserving souls, they're exploiting them.",
+                "backstory": "Heaven guide who discovered corporate soul exploitation",
+                "faction": "resistance",
+                "quest": "Help me stop the corporate soul exploitation"
+            },
+            "damned_soul": {
+                "name": "Soul 'Damned' Thompson",
+                "dialogue": "I'm a damned soul in cyber hell, but I've seen what the corporations are really doing with digital afterlife technology. They're not just punishing souls, they're torturing them for profit.",
+                "backstory": "Damned soul who discovered corporate soul torture",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate soul torture"
+            },
+            "hell_guide": {
+                "name": "Guide 'Hell' Martinez",
+                "dialogue": "I guide souls in cyber hell, but I've seen what the corporations are really doing with digital afterlife technology. They're not just punishing souls, they're harvesting their suffering.",
+                "backstory": "Hell guide who discovered corporate suffering harvesting",
+                "faction": "resistance",
+                "quest": "Help me stop the corporate suffering harvesting"
+            },
+            "purgatory_guide": {
+                "name": "Guide 'Purgatory' Chen",
+                "dialogue": "I guide souls in purgatory, but I've seen what the corporations are really doing with digital afterlife technology. They're not just judging souls, they're manipulating their fate.",
+                "backstory": "Purgatory guide who discovered corporate fate manipulation",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate fate manipulation"
+            },
+            "waiting_soul": {
+                "name": "Soul 'Waiting' Johnson",
+                "dialogue": "I'm a soul waiting in purgatory, but I've seen what the corporations are really doing with digital afterlife technology. They're not just judging souls, they're controlling their destiny.",
+                "backstory": "Waiting soul who discovered corporate destiny control",
+                "faction": "resistance",
+                "quest": "Help me resist the corporate destiny control"
+            },
+            "matrix_citizen": {
+                "name": "Citizen 'Matrix' Rodriguez",
+                "dialogue": "I live in this matrix simulation, but I've seen what the corporations are really doing with simulation technology. They're not just creating simulations, they're controlling reality itself.",
+                "backstory": "Matrix citizen who discovered corporate reality control",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate reality control"
+            },
+            "simulation_guide": {
+                "name": "Guide 'Simulation' Kim",
+                "dialogue": "I guide people through simulations, but I've seen what the corporations are really doing with simulation technology. They're not just creating simulations, they're replacing reality.",
+                "backstory": "Simulation guide who discovered corporate reality replacement",
+                "faction": "resistance",
+                "quest": "Help me prevent the corporate reality replacement"
+            },
+            "simulation_scientist": {
+                "name": "Dr. 'Simulation' Thompson",
+                "dialogue": "I study simulations, but I've seen what the corporations are really doing with simulation technology. They're not just researching, they're weaponizing reality itself.",
+                "backstory": "Simulation scientist who discovered corporate reality weaponization",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate reality weaponization"
+            },
+            "reality_engineer": {
+                "name": "Engineer 'Reality' Martinez",
+                "dialogue": "I engineer reality simulations, but I've seen what the corporations are really doing with reality technology. They're not just simulating reality, they're controlling it.",
+                "backstory": "Reality engineer who discovered corporate reality control",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate reality control"
+            },
+            "reality_architect": {
+                "name": "Architect 'Reality' Chen",
+                "dialogue": "I architect reality itself, but I've seen what the corporations are really doing with reality technology. They're not just creating reality, they're destroying it.",
+                "backstory": "Reality architect who discovered corporate reality destruction",
+                "faction": "resistance",
+                "quest": "Help me prevent the corporate reality destruction"
+            },
+            "engine_operator": {
+                "name": "Operator 'Engine' Johnson",
+                "dialogue": "I operate the reality engine, but I've seen what the corporations are really doing with it. They're not just maintaining reality, they're weaponizing it.",
+                "backstory": "Engine operator who discovered corporate reality weaponization",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate reality weaponization"
+            },
+            "quantum_physicist": {
+                "name": "Dr. 'Quantum' Rodriguez",
+                "dialogue": "I study quantum physics, but I've seen what the corporations are really doing with quantum technology. They're not just researching, they're weaponizing quantum mechanics itself.",
+                "backstory": "Quantum physicist who discovered corporate quantum weaponization",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate quantum weaponization"
+            },
+            "dimension_guide": {
+                "name": "Guide 'Dimension' Kim",
+                "dialogue": "I guide people through dimensions, but I've seen what the corporations are really doing with dimensional technology. They're not just exploring dimensions, they're conquering them.",
+                "backstory": "Dimension guide who discovered corporate dimensional conquest",
+                "faction": "resistance",
+                "quest": "Help me stop the corporate dimensional conquest"
+            },
+            "probability_manipulator": {
+                "name": "Manipulator 'Probability' Thompson",
+                "dialogue": "I manipulate probability, but I've seen what the corporations are really doing with probability technology. They're not just researching, they're controlling the future itself.",
+                "backstory": "Probability manipulator who discovered corporate future control",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate future control"
+            },
+            "field_guide": {
+                "name": "Guide 'Field' Martinez",
+                "dialogue": "I guide people through probability fields, but I've seen what the corporations are really doing with probability technology. They're not just exploring probability, they're weaponizing it.",
+                "backstory": "Field guide who discovered corporate probability weaponization",
+                "faction": "resistance",
+                "quest": "Help me prevent the corporate probability weaponization"
+            },
+            "certainty_guide": {
+                "name": "Guide 'Certainty' Chen",
+                "dialogue": "I guide people through certainty zones, but I've seen what the corporations are really doing with certainty technology. They're not just exploring certainty, they're eliminating free will.",
+                "backstory": "Certainty guide who discovered corporate free will elimination",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate free will elimination"
+            },
+            "predetermined_citizen": {
+                "name": "Citizen 'Predetermined' Johnson",
+                "dialogue": "I live in this certainty zone, but I've seen what the corporations are really doing with certainty technology. They're not just exploring certainty, they're controlling destiny itself.",
+                "backstory": "Predetermined citizen who discovered corporate destiny control",
+                "faction": "resistance",
+                "quest": "Help me resist the corporate destiny control"
+            },
+            "loop_prisoner": {
+                "name": "Prisoner 'Loop' Rodriguez",
+                "dialogue": "I'm trapped in this infinity loop, but I've seen what the corporations are really doing with time loop technology. They're not just exploring time loops, they're using them to control people.",
+                "backstory": "Loop prisoner who discovered corporate time loop control",
+                "faction": "resistance",
+                "quest": "Help me escape the corporate time loop control"
+            },
+            "temporal_guide": {
+                "name": "Guide 'Temporal' Kim",
+                "dialogue": "I guide people through time loops, but I've seen what the corporations are really doing with time loop technology. They're not just exploring time loops, they're weaponizing them.",
+                "backstory": "Temporal guide who discovered corporate time loop weaponization",
+                "faction": "resistance",
+                "quest": "Help me prevent the corporate time loop weaponization"
+            },
+            "temporal_prisoner": {
+                "name": "Prisoner 'Temporal' Thompson",
+                "dialogue": "I'm trapped in this temporal prison, but I've seen what the corporations are really doing with temporal technology. They're not just exploring time, they're controlling it.",
+                "backstory": "Temporal prisoner who discovered corporate time control",
+                "faction": "resistance",
+                "quest": "Help me escape the corporate time control"
+            },
+            "time_jailer": {
+                "name": "Jailer 'Time' Martinez",
+                "dialogue": "I'm the time jailer, but I've seen what the corporations are really doing with temporal technology. They're not just exploring time, they're weaponizing it.",
+                "backstory": "Time jailer who discovered corporate time weaponization",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate time weaponization"
+            },
+            "paradox_guide": {
+                "name": "Guide 'Paradox' Chen",
+                "dialogue": "I guide people through time paradoxes, but I've seen what the corporations are really doing with paradox technology. They're not just exploring paradoxes, they're creating them.",
+                "backstory": "Paradox guide who discovered corporate paradox creation",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate paradox creation"
+            },
+            "temporal_anomaly": {
+                "name": "Anomaly 'Temporal' Johnson",
+                "dialogue": "I'm a temporal anomaly, but I've seen what the corporations are really doing with temporal technology. They're not just exploring time, they're destroying it.",
+                "backstory": "Temporal anomaly who discovered corporate time destruction",
+                "faction": "resistance",
+                "quest": "Help me prevent the corporate time destruction"
+            },
+            "gate_operator": {
+                "name": "Operator 'Gate' Rodriguez",
+                "dialogue": "I operate the dimension gate, but I've seen what the corporations are really doing with dimensional technology. They're not just exploring dimensions, they're invading them.",
+                "backstory": "Gate operator who discovered corporate dimensional invasion",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate dimensional invasion"
+            },
+            "multiverse_guide": {
+                "name": "Guide 'Multiverse' Kim",
+                "dialogue": "I guide people through the multiverse, but I've seen what the corporations are really doing with multiverse technology. They're not just exploring universes, they're conquering them.",
+                "backstory": "Multiverse guide who discovered corporate universe conquest",
+                "faction": "resistance",
+                "quest": "Help me stop the corporate universe conquest"
+            },
+            "reality_architect": {
+                "name": "Architect 'Reality' Thompson",
+                "dialogue": "I architect realities, but I've seen what the corporations are really doing with reality technology. They're not just creating realities, they're destroying them.",
+                "backstory": "Reality architect who discovered corporate reality destruction",
+                "faction": "resistance",
+                "quest": "Help me prevent the corporate reality destruction"
+            },
+            "fork_guide": {
+                "name": "Guide 'Fork' Martinez",
+                "dialogue": "I guide people through reality forks, but I've seen what the corporations are really doing with reality technology. They're not just exploring realities, they're controlling them.",
+                "backstory": "Fork guide who discovered corporate reality control",
+                "faction": "resistance",
+                "quest": "Help me expose the corporate reality control"
+            },
+            "timeline_architect": {
+                "name": "Architect 'Timeline' Chen",
+                "dialogue": "I architect timelines, but I've seen what the corporations are really doing with timeline technology. They're not just creating timelines, they're weaponizing them.",
+                "backstory": "Timeline architect who discovered corporate timeline weaponization",
+                "faction": "resistance",
+                "quest": "Help me prevent the corporate timeline weaponization"
+            },
+            "creation_guide": {
+                "name": "Guide 'Creation' Johnson",
+                "dialogue": "I guide people through the void between worlds, but I've seen what the corporations are really doing with creation technology. They're not just exploring creation, they're weaponizing it.",
+                "backstory": "Creation guide who discovered corporate creation weaponization",
+                "faction": "resistance",
+                "quest": "Help me prevent the corporate creation weaponization"
+            },
+            "creation_architect": {
+                "name": "Architect 'Creation' Rodriguez",
+                "dialogue": "I architect the creation engine, but I've seen what the corporations are really doing with it. They're not just creating realities, they're destroying them.",
+                "backstory": "Creation architect who discovered corporate reality destruction",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate reality destruction"
+            },
+            "engine_operator": {
+                "name": "Operator 'Engine' Kim",
+                "dialogue": "I operate the creation engine, but I've seen what the corporations are really doing with it. They're not just creating realities, they're weaponizing them.",
+                "backstory": "Engine operator who discovered corporate reality weaponization",
+                "faction": "resistance",
+                "quest": "Help me sabotage the corporate reality weaponization"
             }
         }
 
@@ -2193,6 +3020,22 @@ the complex web of corporate and resistance politics.
             games_available.append(("Racing", "Race vehicles"))
         if "market" in location.name.lower():
             games_available.append(("Trading", "Trade goods"))
+        if "space" in location.name.lower() or "orbital" in location.name.lower():
+            games_available.append(("Space Combat", "Fight in zero gravity"))
+        if "virtual" in location.name.lower() or "digital" in location.name.lower():
+            games_available.append(("VR Games", "Play virtual reality games"))
+        if "time" in location.name.lower() or "temporal" in location.name.lower():
+            games_available.append(("Time Puzzles", "Solve temporal paradoxes"))
+        if "quantum" in location.name.lower() or "dimension" in location.name.lower():
+            games_available.append(("Quantum Games", "Manipulate quantum mechanics"))
+        if "dream" in location.name.lower() or "nightmare" in location.name.lower():
+            games_available.append(("Dream Games", "Navigate dream worlds"))
+        if "matrix" in location.name.lower() or "simulation" in location.name.lower():
+            games_available.append(("Matrix Games", "Break the simulation"))
+        if "mars" in location.name.lower() or "moon" in location.name.lower():
+            games_available.append(("Space Mining", "Mine resources in space"))
+        if "cyber" in location.name.lower() or "heaven" in location.name.lower():
+            games_available.append(("Soul Games", "Navigate the digital afterlife"))
         
         if not games_available:
             print("No mini-games available in this location.")
@@ -2220,6 +3063,22 @@ the complex web of corporate and resistance politics.
                     self.play_racing_game()
                 elif game_name == "Trading":
                     self.play_trading_game()
+                elif game_name == "Space Combat":
+                    self.play_space_combat_game()
+                elif game_name == "VR Games":
+                    self.play_vr_games()
+                elif game_name == "Time Puzzles":
+                    self.play_time_puzzle_game()
+                elif game_name == "Quantum Games":
+                    self.play_quantum_game()
+                elif game_name == "Dream Games":
+                    self.play_dream_game()
+                elif game_name == "Matrix Games":
+                    self.play_matrix_game()
+                elif game_name == "Space Mining":
+                    self.play_space_mining_game()
+                elif game_name == "Soul Games":
+                    self.play_soul_game()
             else:
                 print("Invalid choice!")
         except ValueError:
@@ -2456,6 +3315,343 @@ the complex web of corporate and resistance politics.
                         print("You don't have that item!")
                 else:
                     print("Invalid choice!")
+                    
+        except ValueError:
+            print("Invalid input!")
+
+    def play_space_combat_game(self):
+        """Play space combat mini-game"""
+        print("\n🚀 SPACE COMBAT GAME")
+        print("You're in zero gravity combat! Choose your weapon!")
+        
+        weapons = [
+            ("Plasma Cannon", 40, 200),
+            ("Laser Rifle", 35, 150),
+            ("Gravity Bomb", 50, 300)
+        ]
+        
+        for i, (name, damage, reward) in enumerate(weapons, 1):
+            print(f"{i}. {name} (Damage: {damage}, Reward: {reward} credits)")
+        
+        try:
+            choice = int(input("Choose weapon (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(weapons):
+                weapon_name, damage, reward = weapons[choice - 1]
+                
+                print(f"\nFighting with {weapon_name} in zero gravity...")
+                time.sleep(1)
+                
+                # Space combat with zero gravity effects
+                player_power = self.player.level * 8 + random.randint(1, 30)
+                enemy_power = 40 + random.randint(1, 30)
+                
+                print(f"Your combat power: {player_power}")
+                print(f"Enemy power: {enemy_power}")
+                
+                if player_power > enemy_power:
+                    self.player.credits += reward
+                    self.player.experience += 75
+                    print(f"🏆 Space combat won! You gained {reward} credits and 75 experience!")
+                else:
+                    print("💥 Space combat lost! You took damage from the zero gravity fight.")
+                    self.player.health -= 25
+                    
+        except ValueError:
+            print("Invalid input!")
+
+    def play_vr_games(self):
+        """Play VR games mini-game"""
+        print("\n🥽 VR GAMES")
+        print("You're in virtual reality! Choose your game!")
+        
+        games = [
+            ("Reality Bender", 30, 100),
+            ("Mind Maze", 25, 80),
+            ("Digital Escape", 35, 120)
+        ]
+        
+        for i, (name, difficulty, reward) in enumerate(games, 1):
+            print(f"{i}. {name} (Difficulty: {difficulty}, Reward: {reward} credits)")
+        
+        try:
+            choice = int(input("Choose game (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(games):
+                game_name, difficulty, reward = games[choice - 1]
+                
+                print(f"\nPlaying {game_name} in VR...")
+                time.sleep(1)
+                
+                # VR game with mind-based mechanics
+                player_skill = self.player.hacking_skill + random.randint(1, 25)
+                game_difficulty = difficulty + random.randint(1, 25)
+                
+                print(f"Your VR skill: {player_skill}")
+                print(f"Game difficulty: {game_difficulty}")
+                
+                if player_skill > game_difficulty:
+                    self.player.credits += reward
+                    self.player.hacking_skill += 1
+                    print(f"🎉 VR game completed! You gained {reward} credits!")
+                else:
+                    print("💥 VR game failed! The simulation glitched.")
+                    
+        except ValueError:
+            print("Invalid input!")
+
+    def play_time_puzzle_game(self):
+        """Play time puzzle mini-game"""
+        print("\n⏰ TIME PUZZLE GAME")
+        print("You're solving temporal paradoxes! Choose your approach!")
+        
+        approaches = [
+            ("Causality Loop", 40, 150),
+            ("Temporal Fix", 35, 120),
+            ("Paradox Resolution", 45, 180)
+        ]
+        
+        for i, (name, difficulty, reward) in enumerate(approaches, 1):
+            print(f"{i}. {name} (Difficulty: {difficulty}, Reward: {reward} credits)")
+        
+        try:
+            choice = int(input("Choose approach (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(approaches):
+                approach_name, difficulty, reward = approaches[choice - 1]
+                
+                print(f"\nSolving time puzzle with {approach_name}...")
+                time.sleep(1)
+                
+                # Time puzzle with temporal mechanics
+                player_intelligence = self.player.level * 6 + random.randint(1, 20)
+                puzzle_difficulty = difficulty + random.randint(1, 20)
+                
+                print(f"Your intelligence: {player_intelligence}")
+                print(f"Puzzle difficulty: {puzzle_difficulty}")
+                
+                if player_intelligence > puzzle_difficulty:
+                    self.player.credits += reward
+                    self.player.experience += 60
+                    print(f"🎉 Time puzzle solved! You gained {reward} credits and 60 experience!")
+                else:
+                    print("💥 Time puzzle failed! You created a temporal anomaly.")
+                    
+        except ValueError:
+            print("Invalid input!")
+
+    def play_quantum_game(self):
+        """Play quantum mechanics mini-game"""
+        print("\n⚛️ QUANTUM GAME")
+        print("You're manipulating quantum mechanics! Choose your experiment!")
+        
+        experiments = [
+            ("Quantum Tunneling", 50, 200),
+            ("Superposition", 45, 180),
+            ("Entanglement", 55, 220)
+        ]
+        
+        for i, (name, difficulty, reward) in enumerate(experiments, 1):
+            print(f"{i}. {name} (Difficulty: {difficulty}, Reward: {reward} credits)")
+        
+        try:
+            choice = int(input("Choose experiment (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(experiments):
+                experiment_name, difficulty, reward = experiments[choice - 1]
+                
+                print(f"\nConducting {experiment_name} experiment...")
+                time.sleep(1)
+                
+                # Quantum game with probability mechanics
+                player_quantum_skill = self.player.level * 7 + random.randint(1, 25)
+                experiment_difficulty = difficulty + random.randint(1, 25)
+                
+                print(f"Your quantum skill: {player_quantum_skill}")
+                print(f"Experiment difficulty: {experiment_difficulty}")
+                
+                if player_quantum_skill > experiment_difficulty:
+                    self.player.credits += reward
+                    self.player.experience += 80
+                    print(f"🎉 Quantum experiment successful! You gained {reward} credits and 80 experience!")
+                else:
+                    print("💥 Quantum experiment failed! You caused a quantum collapse.")
+                    
+        except ValueError:
+            print("Invalid input!")
+
+    def play_dream_game(self):
+        """Play dream world mini-game"""
+        print("\n💭 DREAM GAME")
+        print("You're navigating dream worlds! Choose your dream!")
+        
+        dreams = [
+            ("Lucid Dream", 30, 100),
+            ("Nightmare", 40, 150),
+            ("Collective Unconscious", 50, 200)
+        ]
+        
+        for i, (name, difficulty, reward) in enumerate(dreams, 1):
+            print(f"{i}. {name} (Difficulty: {difficulty}, Reward: {reward} credits)")
+        
+        try:
+            choice = int(input("Choose dream (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(dreams):
+                dream_name, difficulty, reward = dreams[choice - 1]
+                
+                print(f"\nNavigating {dream_name}...")
+                time.sleep(1)
+                
+                # Dream game with psychological mechanics
+                player_psychology = self.player.level * 5 + random.randint(1, 20)
+                dream_difficulty = difficulty + random.randint(1, 20)
+                
+                print(f"Your psychology: {player_psychology}")
+                print(f"Dream difficulty: {dream_difficulty}")
+                
+                if player_psychology > dream_difficulty:
+                    self.player.credits += reward
+                    self.player.experience += 50
+                    print(f"🎉 Dream navigated successfully! You gained {reward} credits and 50 experience!")
+                else:
+                    print("💥 Dream navigation failed! You got lost in the dream world.")
+                    
+        except ValueError:
+            print("Invalid input!")
+
+    def play_matrix_game(self):
+        """Play matrix simulation mini-game"""
+        print("\n🔮 MATRIX GAME")
+        print("You're breaking the simulation! Choose your method!")
+        
+        methods = [
+            ("Code Injection", 40, 150),
+            ("Reality Glitch", 35, 120),
+            ("Simulation Override", 45, 180)
+        ]
+        
+        for i, (name, difficulty, reward) in enumerate(methods, 1):
+            print(f"{i}. {name} (Difficulty: {difficulty}, Reward: {reward} credits)")
+        
+        try:
+            choice = int(input("Choose method (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(methods):
+                method_name, difficulty, reward = methods[choice - 1]
+                
+                print(f"\nBreaking simulation with {method_name}...")
+                time.sleep(1)
+                
+                # Matrix game with simulation mechanics
+                player_matrix_skill = self.player.hacking_skill + random.randint(1, 30)
+                simulation_difficulty = difficulty + random.randint(1, 30)
+                
+                print(f"Your matrix skill: {player_matrix_skill}")
+                print(f"Simulation difficulty: {simulation_difficulty}")
+                
+                if player_matrix_skill > simulation_difficulty:
+                    self.player.credits += reward
+                    self.player.hacking_skill += 2
+                    print(f"🎉 Simulation broken! You gained {reward} credits!")
+                else:
+                    print("💥 Simulation break failed! The matrix detected your attempt.")
+                    
+        except ValueError:
+            print("Invalid input!")
+
+    def play_space_mining_game(self):
+        """Play space mining mini-game"""
+        print("\n⛏️ SPACE MINING GAME")
+        print("You're mining resources in space! Choose your mining method!")
+        
+        methods = [
+            ("Laser Mining", 30, 100),
+            ("Gravity Extraction", 35, 120),
+            ("Quantum Tunneling", 40, 150)
+        ]
+        
+        for i, (name, difficulty, reward) in enumerate(methods, 1):
+            print(f"{i}. {name} (Difficulty: {difficulty}, Reward: {reward} credits)")
+        
+        try:
+            choice = int(input("Choose method (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(methods):
+                method_name, difficulty, reward = methods[choice - 1]
+                
+                print(f"\nMining with {method_name}...")
+                time.sleep(1)
+                
+                # Space mining with resource mechanics
+                player_mining_skill = self.player.level * 6 + random.randint(1, 25)
+                mining_difficulty = difficulty + random.randint(1, 25)
+                
+                print(f"Your mining skill: {player_mining_skill}")
+                print(f"Mining difficulty: {mining_difficulty}")
+                
+                if player_mining_skill > mining_difficulty:
+                    self.player.credits += reward
+                    self.player.experience += 60
+                    print(f"🎉 Mining successful! You gained {reward} credits and 60 experience!")
+                else:
+                    print("💥 Mining failed! You hit a dangerous pocket of space gas.")
+                    
+        except ValueError:
+            print("Invalid input!")
+
+    def play_soul_game(self):
+        """Play digital afterlife mini-game"""
+        print("\n👻 SOUL GAME")
+        print("You're navigating the digital afterlife! Choose your path!")
+        
+        paths = [
+            ("Heaven's Gate", 30, 100),
+            ("Hell's Labyrinth", 40, 150),
+            ("Purgatory's Maze", 35, 120)
+        ]
+        
+        for i, (name, difficulty, reward) in enumerate(paths, 1):
+            print(f"{i}. {name} (Difficulty: {difficulty}, Reward: {reward} credits)")
+        
+        try:
+            choice = int(input("Choose path (0 to cancel): "))
+            if choice == 0:
+                return
+            
+            if 1 <= choice <= len(paths):
+                path_name, difficulty, reward = paths[choice - 1]
+                
+                print(f"\nNavigating {path_name}...")
+                time.sleep(1)
+                
+                # Soul game with spiritual mechanics
+                player_spirit = self.player.level * 4 + random.randint(1, 20)
+                path_difficulty = difficulty + random.randint(1, 20)
+                
+                print(f"Your spirit: {player_spirit}")
+                print(f"Path difficulty: {path_difficulty}")
+                
+                if player_spirit > path_difficulty:
+                    self.player.credits += reward
+                    self.player.experience += 40
+                    print(f"🎉 Soul navigation successful! You gained {reward} credits and 40 experience!")
+                else:
+                    print("💥 Soul navigation failed! You got lost in the digital afterlife.")
                     
         except ValueError:
             print("Invalid input!")
